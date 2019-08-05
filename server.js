@@ -1,0 +1,55 @@
+// Get dependencies
+const express = require('express');
+const path = require('path');
+const http = require('http');
+const bodyParser = require('body-parser');
+// Get database information
+const sequelize = require('./src/server/util/database');
+
+// Get our API routes
+// const bowlsRoutes = require('./src/server/routes/bowls');
+// const gamesRoutes = require('./src/server/routes/games');
+// const teamRanksRoutes = require('./src/server/routes/team_ranks');
+// const teamsRoutes = require('./src/server/routes/teams');
+// const userSelectionsRoutes = require('./src/server/routes/user_selections');
+const usersRoutes = require('./src/server/routes/users');
+
+const app = express();
+
+// Parsers for POST data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Point static path to dist/src (Prod/Dev)
+app.use(express.static(path.join(__dirname, 'src')));
+
+// Set our api routes
+// app.use('/api/bowls', bowlsRoutes);
+// app.use('/api/games', gamesRoutes);
+// app.use('/api/teams/ranks', teamRanksRoutes);
+// app.use('/api/teams', teamsRoutes);
+// app.use('/api/users/:id/selections', userSelectionsRoutes);
+app.use('/api/users', usersRoutes);
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src/index.html'));
+});
+
+// Get port from environment and store in Express.
+const port = process.env.PORT || '3000';
+app.set('port', port);
+
+// Create HTTP server.
+const server = http.createServer(app);
+
+// Seuqlize Sync, create table
+sequelize.sync().then(result => {
+    console.log(result);
+
+    // Listen on provided port, on all network interfaces.
+    server.listen(port, () => console.log(`API running on localhost:${port}`));
+}).catch(err => {
+    console.log(err);
+    console.log('API Server not started');
+});
