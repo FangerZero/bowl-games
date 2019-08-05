@@ -11,6 +11,6 @@ router.delete('/:id', usersController.deleteUser);
 
 router.post('/', usersController.createUser);
 
-router.get('/', usersController.getAllUsers);
+router.get('/', usersController.getUsers);
 
 module.exports = router;
