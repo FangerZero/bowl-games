@@ -8,9 +8,9 @@ const sequelize = require('./server/util/database');
 
 // Get our API routes
 // const bowlsRoutes = require('./server/routes/bowls');
-// const gamesRoutes = require('./server/routes/games');
+const gamesRoutes = require('./server/routes/games');
 // const teamRanksRoutes = require('./server/routes/team_ranks');
-// const teamsRoutes = require('./server/routes/teams');
+const teamsRoutes = require('./server/routes/teams');
 // const userSelectionsRoutes = require('./server/routes/user_selections');
 const usersRoutes = require('./server/routes/users');
 
@@ -25,9 +25,9 @@ app.use(express.static(path.join(__dirname, 'src')));
 
 // Set our api routes
 // app.use('/api/bowls', bowlsRoutes);
-// app.use('/api/games', gamesRoutes);
+app.use('/api/games', gamesRoutes);
 // app.use('/api/teams/ranks', teamRanksRoutes);
-// app.use('/api/teams', teamsRoutes);
+app.use('/api/teams', teamsRoutes);
 // app.use('/api/users/:id/selections', userSelectionsRoutes);
 app.use('/api/users', usersRoutes);
 
