@@ -26,7 +26,7 @@
               </ion-item>
             </ion-list>
             <div text-center>
-              <ion-button type="submit" color="primary" (click)="onLogin()" expand="block" [disabled]="!login.valid">Login</ion-button>
+              <ion-button type="submit" color="primary" (click)="onLogin()" expand="block" [disabled]="!login.valid">{{ isLogin ? 'Login' : 'Sign-up'}}</ion-button>
               <ion-button type="button" color="primary" fill="clear" expand="block" (click)="onSwitchAuthMode()">{{ isLogin ? 'Sign-up' : 'Login'}}</ion-button>
             </div>
           </ion-col>

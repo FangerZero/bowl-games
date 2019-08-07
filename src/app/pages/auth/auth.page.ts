@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -12,21 +13,19 @@ export class AuthPage implements OnInit {
   isLoading = false;
   isLogin = true;
 
-  constructor(private loadingCtrl: LoadingController, private router: Router) { }
+  constructor(private loadingCtrl: LoadingController, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   onLogin() {
-    console.log('logging in');
+    this.authService.login();
     this.loadingCtrl.create({ keyboardClose: true, message: 'Logging in...' })
       .then(loadingEl => {
         loadingEl.present();
-        setTimeout(() => {
-          this.isLoading = false;
-          loadingEl.dismiss();
-          this.router.navigateByUrl('/games');
-        }, 1500);
+        this.isLoading = false;
+        loadingEl.dismiss();
+        this.router.navigateByUrl('/games');
       });
   }
 

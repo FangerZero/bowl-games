@@ -4,14 +4,26 @@
       <ion-menu-button menu="main"></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Ionic Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="4" offset-md="4">
+        See if you can guess the best teams in the Bowl Games! Directions below. 
+        <ol>
+          <li>Sign-up</li>
+          <li>Pick your teams</li>
+          <li>Pay $10.00</li>
+          <li>Watch Football and enjoy!</li>
+        </ol>
+        <ion-button type="button" routerLink="/auth" color="primary">
+          <ion-label>Login Now!</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
