@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Games</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let game of loadedGames">
+    <ion-item (click)="onOpenGame(0)">
+      {{ game.bowlId }}
+    </ion-item>
+  </ion-list>
+</ion-content>

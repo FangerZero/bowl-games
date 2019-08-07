@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ game.bowlId }}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onClose()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  {{ game.teamId1 }} vs {{ game.teamId2 }}
+  <br />
+  Date: {{ game.date }}
+  <br />
+  Channel: {{ game.channel }}
+  <br />
+  Points: {{ game.points }}
+</ion-content>
+  

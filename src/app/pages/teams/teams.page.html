@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Teams</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngFor="let team of loadedTeams">
+      <ion-item (click)="onOpenTeam(0)">
+        {{ team.name }}
+      </ion-item>
+    </ion-list>
+</ion-content>
