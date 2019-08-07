@@ -41,6 +41,7 @@ export class AuthPage implements OnInit {
     const password = form.value.password;
     //console.log(email, password);
     if (this.isLogin) {
+      form.reset();
       // Send Request to Login
     } else {
       // Send Request to Sign up
