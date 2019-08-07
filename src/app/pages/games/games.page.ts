@@ -21,7 +21,7 @@ export class GamesPage implements OnInit {
 
   onOpenGame(gameId: string) {
     this.modalCtrl
-    .create({ component: GameComponent, componentProps: {game: this.loadedGames[gameId]}, id: 'gameModal' })
+    .create({ component: GameComponent, componentProps: { game: this.loadedGames[gameId]}, id: 'gameModal' })
     .then(modalEl => {
       modalEl.present();
     });

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
+import { Team } from '../team.model';
 
 @Component({
   selector: 'app-team',
@@ -6,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team.component.scss'],
 })
 export class TeamComponent implements OnInit {
+  @Input() team: Team;
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {}
+
+  onClose() {
+    this.modalCtrl.dismiss(null, 'close', 'teamModal');
+  }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Game } from '../game.model';
 import { ModalController } from '@ionic/angular';
+
+import { Game } from '../game.model';
 
 @Component({
   selector: 'app-game',

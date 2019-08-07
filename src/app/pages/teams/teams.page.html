@@ -8,5 +8,9 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-list *ngFor="let team of loadedTeams">
+      <ion-item (click)="onOpenTeam(0)">
+        {{ team.name }}
+      </ion-item>
+    </ion-list>
 </ion-content>
