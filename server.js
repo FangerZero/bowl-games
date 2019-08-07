@@ -4,15 +4,15 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 // Get database information
-const sequelize = require('./src/server/util/database');
+const sequelize = require('./server/util/database');
 
 // Get our API routes
-// const bowlsRoutes = require('./src/server/routes/bowls');
-// const gamesRoutes = require('./src/server/routes/games');
-// const teamRanksRoutes = require('./src/server/routes/team_ranks');
-// const teamsRoutes = require('./src/server/routes/teams');
-// const userSelectionsRoutes = require('./src/server/routes/user_selections');
-const usersRoutes = require('./src/server/routes/users');
+// const bowlsRoutes = require('./server/routes/bowls');
+// const gamesRoutes = require('./server/routes/games');
+// const teamRanksRoutes = require('./server/routes/team_ranks');
+// const teamsRoutes = require('./server/routes/teams');
+// const userSelectionsRoutes = require('./server/routes/user_selections');
+const usersRoutes = require('./server/routes/users');
 
 const app = express();
 
