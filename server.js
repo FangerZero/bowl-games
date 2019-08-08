@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const sequelize = require('./server/util/database');
 
 // Get our API routes
-// const bowlsRoutes = require('./server/routes/bowls');
+const bowlsRoutes = require('./server/routes/bowls');
 const gamesRoutes = require('./server/routes/games');
 // const teamRanksRoutes = require('./server/routes/team_ranks');
 const teamsRoutes = require('./server/routes/teams');
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Determines and Sets the headers
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-type, Accept");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-type, Accept, Authorization");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
   next();
 });
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'src')));
 
 // Set our api routes
-// app.use('/api/bowls', bowlsRoutes);
+app.use('/api/bowls', bowlsRoutes);
 app.use('/api/games', gamesRoutes);
 // app.use('/api/teams/ranks', teamRanksRoutes);
 app.use('/api/teams', teamsRoutes);
