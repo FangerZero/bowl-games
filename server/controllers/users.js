@@ -1,9 +1,11 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 /**************
  * Get All Users
  */
 exports.getUsers = (req, res, next) => {
+    console.log('getUsers');
     User.findAll().then(users => {
         res.send(users);
     }).catch(err => console.log(err));
@@ -13,6 +15,7 @@ exports.getUsers = (req, res, next) => {
  * Get User by ID
  */
 exports.getUser = (req, res, next) => {
+    console.log('getUser');
     User.findByPk(req.url.slice(1)).then(user => {
         res.send(user.dataValues);
     }).catch(err => console.log(err));
@@ -22,27 +25,32 @@ exports.getUser = (req, res, next) => {
  * Create New User
  */
 exports.createUser = (req, res, next) => {
-    const params = req.query;
-    
-    User.create({
-        name: params.name,
-        alias: params.alias || '',
-        email: params.email,
-        password: params.password,
-        verified: false,
-        paid: false,
-        admin: false,
-    })
-    .then(result => {
-        res.send(result);
-    })
-    .catch(err => console.log('User CreateUser: ', err));
+    console.log('createUser');
+    const params = req.body;
+    bcrypt.hash(params.password, 13)
+        .then(hash => {
+            console.log('Hashed Password');
+            User.create({
+                name: params.name || '',
+                alias: params.alias || '',
+                email: params.email,
+                password: hash,
+                verified: false,
+                paid: false,
+                admin: false,
+            }).then(result => {
+                res.status(201).json({
+                    message: 'User Successfully Created.'
+                });
+            }).catch(err => console.log('User CreateUser: ', err));
+        }).catch(err => console.log('BCrypt Error', err));
 };
 
 /**************
  * Update User by ID
  */
 exports.updateUser = (req, res, next) => {
+    console.log('updateUser');
     User.findByPk(req.url.slice(1)).then(user => {
         user.name = req.query.name || user.name;
         user.alias = req.query.alias || user.alias;
@@ -59,6 +67,7 @@ exports.updateUser = (req, res, next) => {
  * Delete User by ID
  */
 exports.deleteUser = (req, res, next) => {
+    console.log('deleteUser');
     User.findByPk(req.url.slice(1))
     .then(user => {
         return user.destroy();
