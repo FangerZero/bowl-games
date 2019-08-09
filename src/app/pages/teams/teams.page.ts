@@ -16,12 +16,19 @@ export class TeamsPage implements OnInit {
   constructor(private teamsService: TeamsService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.loadedTeams = this.teamsService.teams;
+    this.teamsService.teams.subscribe(teams => {
+      this.loadedTeams = teams.sort((a,b) => {
+        if(a.name < b.name) { return -1; }
+        if(a.name > b.name) { return 1; }
+        return 0;
+      });
+    });
   }
 
-  onOpenTeam(teamId: string) {
+  onOpenTeam(teamId: number) {
+    const loadedTeam = this.loadedTeams.find(team => team.id === teamId);
     this.modalCtrl
-    .create({ component: TeamComponent, componentProps: { team: this.loadedTeams[teamId]}, id: 'teamModal' })
+    .create({ component: TeamComponent, componentProps: { team: loadedTeam}, id: 'teamModal' })
     .then(modalEl => {
       modalEl.present();
     });
