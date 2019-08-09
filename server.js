@@ -5,6 +5,12 @@ const http = require('http');
 const bodyParser = require('body-parser');
 // Get database information
 const sequelize = require('./server/util/database');
+const User = require('./server/models/user');
+const Game = require('./server/models/game');
+const Bowl = require('./server/models/bowl');
+const Team = require('./server/models/team');
+const UserSelection = require('./server/models/userSelection');
+const TeamRank = require('./server/models/teamRank');
 
 // Get our API routes
 const bowlsRoutes = require('./server/routes/bowls');
@@ -51,8 +57,28 @@ app.set('port', port);
 // Create HTTP server.
 const server = http.createServer(app);
 
+// ******************
+// ASSOCIATIONS
+// UserSelection
+UserSelection.belongsTo(Game);
+Game.hasMany(UserSelection);
+UserSelection.belongsTo(User);
+User.hasMany(UserSelection);
+UserSelection.belongsTo(Team);
+Team.hasMany(UserSelection);
+// Team Ranks
+TeamRank.belongsTo(Team);
+Team.hasMany(TeamRank);
+// Games
+Game.belongsTo(Bowl);
+Bowl.hasMany(Game);
+Game.belongsTo(Team, { as: 'teamID1', foreignKey: 'id' });
+Game.belongsTo(Team, { as: 'teamID2', foreignKey: 'id' });
+
 // Seuqlize Sync, create table
-sequelize.sync().then(result => {
+sequelize
+  // .sync({ force: true }).then(result => {
+  .sync().then(result => {
     console.log(result);
 
     // Listen on provided port, on all network interfaces.
