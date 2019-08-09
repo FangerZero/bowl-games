@@ -16,12 +16,15 @@ export class GamesPage implements OnInit {
   constructor(private gamesService: GamesService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.loadedGames = this.gamesService.games;
+    this.gamesService.games.subscribe(games => {
+      this.loadedGames = games;
+    });
   }
 
-  onOpenGame(gameId: string) {
+  onOpenGame(gameId: number) {
+    const loadedGame = this.loadedGames.find(game => game.bowlId === gameId);
     this.modalCtrl
-    .create({ component: GameComponent, componentProps: { game: this.loadedGames[gameId]}, id: 'gameModal' })
+    .create({ component: GameComponent, componentProps: { game: loadedGame}, id: 'gameModal' })
     .then(modalEl => {
       modalEl.present();
     });

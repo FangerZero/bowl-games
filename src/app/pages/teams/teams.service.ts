@@ -6,13 +6,9 @@ import { Team } from './team.model';
   providedIn: 'root'
 })
 export class TeamsService {
-  // tslint:disable-next-line: variable-name
-  private _teams: Team[] = [];
-
   get teams() {
     return this.http.get<Team[]>('http://localhost:3000/api/teams/');
   }
 
   constructor(private http: HttpClient) { }
-
 }

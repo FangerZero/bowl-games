@@ -7,9 +7,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list *ngFor="let game of loadedGames">
-    <ion-item (click)="onOpenGame(0)">
+    <ion-item (click)="onOpenGame(this.game.bowlId)">
       {{ game.bowlId }}
     </ion-item>
   </ion-list>
