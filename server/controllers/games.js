@@ -22,7 +22,7 @@ exports.getGame = (req, res, next) => {
  * Create New Game
  */
 exports.createGame = (req, res, next) => {
-    const params = req.query;
+    const params = req.body;
     
     Game.create({
         bowlId: params.bowlId,
@@ -43,12 +43,12 @@ exports.createGame = (req, res, next) => {
  */
 exports.updateGame = (req, res, next) => {
     Game.findByPk(req.url.slice(1)).then(game => {
-        game.bowlId = req.query.bowlId || game.bowlId;
-        game.teamId1 = req.query.teamId1 || game.teamId1;
-        game.teamId2 = req.query.teamId2 || game.teamId2;
-        game.date = req.query.date || game.date;
-        game.channel = req.query.channel || game.channel;
-        game.points = req.query.points || game.points;
+        game.bowlId = req.body.bowlId || game.bowlId;
+        game.teamId1 = req.body.teamId1 || game.teamId1;
+        game.teamId2 = req.body.teamId2 || game.teamId2;
+        game.date = req.body.date || game.date;
+        game.channel = req.body.channel || game.channel;
+        game.points = req.body.points || game.points;
         return game.save();
     }).then(result => res.send(result))
     .catch(err => console.log(err));

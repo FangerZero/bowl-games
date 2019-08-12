@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Team } from './team.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamsService {
-  // tslint:disable-next-line: variable-name
-  private _teams: Team[] = [
-    new Team(1, 'University of Wisconsin', 'Madison', 'Wisconsin'),
-    new Team(2, 'University of Nebraska-Lincoln', 'Lincoln', 'Nebraska')
-  ];
-
   get teams() {
-    return [...this._teams];
+    return this.http.get<Team[]>('http://localhost:3000/api/teams/');
   }
-  constructor() { }
+
+  constructor(private http: HttpClient) { }
 }

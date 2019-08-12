@@ -12,6 +12,8 @@ import { AuthService } from './pages/auth/auth.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  loggedIn = false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -26,6 +28,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.loggedIn = !!this.authService.token;
     });
   }
 

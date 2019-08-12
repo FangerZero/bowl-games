@@ -22,12 +22,12 @@ exports.getTeam = (req, res, next) => {
  * Create New Team
  */
 exports.createTeam = (req, res, next) => {
-    const params = req.query;
+    const params = req.body;
     
     Team.create({
         name: params.name,
         city: params.city,
-        state: state,
+        state: params.state,
     })
     .then(result => {
         res.send(result);
@@ -40,9 +40,9 @@ exports.createTeam = (req, res, next) => {
  */
 exports.updateTeam = (req, res, next) => {
     Team.findByPk(req.url.slice(1)).then(team => {
-        team.name = req.query.name || team.name;
-        team.city = req.query.city || team.city;
-        team.state = req.query.state || team.state;
+        team.name = req.body.name || team.name;
+        team.city = req.body.city || team.city;
+        team.state = req.body.state || team.state;
         return team.save();
     }).then(result => res.send(result))
     .catch(err => console.log(err));
