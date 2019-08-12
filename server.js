@@ -42,7 +42,7 @@ app.use('/api/bowls', bowlsRoutes);
 app.use('/api/games', gamesRoutes);
 // app.use('/api/teams/ranks', teamRanksRoutes);
 app.use('/api/teams', teamsRoutes);
-// app.use('/api/users/:id/selections', userSelectionsRoutes);
+app.use('/api/:userId/selections', userSelectionsRoutes);
 app.use('/api/users', usersRoutes);
 
 // Catch all other routes and return the index file
