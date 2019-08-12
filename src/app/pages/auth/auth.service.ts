@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthData } from './auth-data.model';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class AuthService {
   // tslint:disable-next-line: variable-name
   private _userIsAuthenticated = false;
   private _token: string;
+  // Push Token to Interested Components
+  private _authStatusListener = new Subject<boolean>();
 
   get userIsAuthenticated() {
     return this._userIsAuthenticated;
@@ -22,6 +25,10 @@ export class AuthService {
   }
 
   constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
+
+  getAuthStatusListener() {
+    return this._authStatusListener.asObservable();
+  }
 
   createUser(email: string, password: string) {
     const authData: AuthData = { email, password };
@@ -37,6 +44,7 @@ export class AuthService {
     .subscribe(response => {
       const token = response.token;
       this._token = token;
+      this._authStatusListener.next(true);
 
       if (token) {
         this.loadingCtrl.create({ keyboardClose: true, message: 'Logging in...' })
