@@ -4,6 +4,7 @@ const router = express.Router();
 const gamesController = require('../controllers/games');
 
 router.get('/:id', gamesController.getGame);
+// router.get('/', gamesController.getGames);
 router.get('/', gamesController.getGames);
 
 router.patch('/:id', gamesController.updateGame);

@@ -1,12 +1,32 @@
 const Game = require('../models/game');
+const Bowl = require('../models/bowl');
+const Team = require('../models/team');
 
 /**************
  * Get All Games
  */
 exports.getGames = (req, res, next) => {
+    console.log('=========================================');
     Game.findAll().then(games => {
-        res.send(games);
+        let newGames = [];
+        // let newGame = [];
+        games.forEach(game => {
+            console.log('game', game.id);
+            let newGame = game.dataValues;
+            Bowl.findByPk(game.bowlId).then(bowl => {
+                newGame['bowlName'] = bowl.name;
+            });
+            Team.findByPk(game.teamId1).then(team => {
+                newGame['team1Name'] = team.name;
+            });
+            Team.findByPk(game.teamId2).then(team => {
+                newGame['team2Name'] = team.name;
+                newGames.push(newGame);
+                res.send(newGames);
+            });
+        });
     }).catch(err => console.log(err));
+    
 };
 
 /**************
@@ -14,7 +34,17 @@ exports.getGames = (req, res, next) => {
  */
 exports.getGame = (req, res, next) => {
     Game.findByPk(req.url.slice(1)).then(game => {
-        res.send(game.dataValues);
+        let newGame = game.dataValues;
+        Bowl.findByPk(game.bowlId).then(bowl => {
+            newGame['bowlName'] = bowl.name;
+        });
+        Team.findByPk(game.teamId1).then(team => {
+            newGame['team1Name'] = team.name;
+        });
+        Team.findByPk(game.teamId2).then(team => {
+            newGame['team2Name'] = team.name;
+            res.send(newGame);
+        });
     }).catch(err => console.log(err));
 };
 
