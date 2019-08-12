@@ -15,9 +15,9 @@ const TeamRank = require('./server/models/teamRank');
 // Get our API routes
 const bowlsRoutes = require('./server/routes/bowls');
 const gamesRoutes = require('./server/routes/games');
-// const teamRanksRoutes = require('./server/routes/team_ranks');
+// const teamRanksRoutes = require('./server/routes/teamRanks');
 const teamsRoutes = require('./server/routes/teams');
-const userSelectionsRoutes = require('./server/routes/user_selections');
+const userSelectionsRoutes = require('./server/routes/userSelections');
 const usersRoutes = require('./server/routes/users');
 
 const app = express();
