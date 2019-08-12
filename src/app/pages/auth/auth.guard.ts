@@ -9,9 +9,11 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean>|Promise<boolean>|boolean {
-    if (!this.authService.userIsAuthenticated) {
+    console.log('route', route);
+    if (!this.authService.token) {
       this.router.navigateByUrl('/auth');
+      return false;
     }
-    return this.authService.userIsAuthenticated;
+    return true;
   }
 }

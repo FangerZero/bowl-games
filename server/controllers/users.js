@@ -1,5 +1,8 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const salt = 13;
+const secretKey = '720Qu9|&r)/(uCOq!m:P)z*9bDS,2)_qYbLTY7EkAQQk_7ipRWZ2UZIZ1fu_fMya5azU2xd4VTD_aN8JeLum43LfxGUZ2Ye_73ed4M4nA71$h_7E3DH!M70r4d4Y_t34(H4m4NT0715h_73EDH1mF0R41!7ET1m3_0UYiML6xfHuuQ_gMAjwz56ubcBYg_vqt3sZfrVsPeqce_p39AtSBlDzXMPiMywdI_C~aKo-|N8jBfsIC..}g^Qo1f.=eR<V';
 
 /**************
  * Get All Users
@@ -27,7 +30,7 @@ exports.getUser = (req, res, next) => {
 exports.createUser = (req, res, next) => {
     console.log('createUser');
     const params = req.body;
-    bcrypt.hash(params.password, 13)
+    bcrypt.hash(params.password, salt)
         .then(hash => {
             console.log('Hashed Password');
             User.create({
@@ -52,12 +55,12 @@ exports.createUser = (req, res, next) => {
 exports.updateUser = (req, res, next) => {
     console.log('updateUser');
     User.findByPk(req.url.slice(1)).then(user => {
-        user.name = req.query.name || user.name;
-        user.alias = req.query.alias || user.alias;
-        user.email = req.query.email || user.email;
-        user.password = req.query.password || user.password;
-        user.verified = req.query.verified || user.verified;
-        user.paid = req.query.paid || user.paid;
+        user.name = req.body.name || user.name;
+        user.alias = req.body.alias || user.alias;
+        user.email = req.body.email || user.email;
+        user.password = req.body.password || user.password;
+        user.verified = req.body.verified || user.verified;
+        user.paid = req.body.paid || user.paid;
         return user.save();
     }).then(result => res.send(result))
     .catch(err => console.log(err));
@@ -76,4 +79,37 @@ exports.deleteUser = (req, res, next) => {
         console.log('User Deleted');
     })
     .catch(err => console.log(err));
+};
+
+/**************
+ * Validate & Create Token Upon Login
+ */
+exports.postLogin =  (req, res, next) => {
+    let fetchedUser;
+    User.findOne({ where: { email: req.body.email} })
+        .then(user => {
+            console.log('user');
+            if (!user) {
+                return res.status(401).json({
+                    message: "Authentication failed."
+                });
+            }
+            fetchedUser = user;
+            return bcrypt.compare(req.body.password, user.password);
+        }).then(result => {
+            console.log('result');
+            if(!result) {
+                return res.status(401).json({
+                    message: "Authentication failed."
+                });
+            }
+            const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.userId}, secretKey, { expiresIn: '1h' });
+            res.status(200).json({ token });
+        }).catch(err => {
+            console.log(err);
+            /*return res.status(401).json({
+                message: "Authentication failed."
+            });
+            */
+        });
 };
