@@ -6,25 +6,16 @@ const Team = require('../models/team');
  * Get All Games
  */
 exports.getGames = (req, res, next) => {
-    console.log('=========================================');
-    Game.findAll().then(games => {
-        let newGames = [];
-        // let newGame = [];
-        games.forEach(game => {
-            console.log('game', game.id);
-            let newGame = game.dataValues;
-            Bowl.findByPk(game.bowlId).then(bowl => {
-                newGame['bowlName'] = bowl.name;
-            });
-            Team.findByPk(game.teamId1).then(team => {
-                newGame['team1Name'] = team.name;
-            });
-            Team.findByPk(game.teamId2).then(team => {
-                newGame['team2Name'] = team.name;
-                newGames.push(newGame);
-                res.send(newGames);
-            });
-        });
+    Game.findAll({ include: [{
+        model: Bowl
+    }, {
+        model: Team,
+        as: 'team1'
+    }, {
+        model: Team,
+        as: 'team2'
+    }] }).then(games => {
+        res.send(games);
     }).catch(err => console.log(err));
     
 };

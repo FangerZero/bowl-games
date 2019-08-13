@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ game.bowlName }}</ion-title>
+    <ion-title>{{ game.bowl.name }}</ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="onClose()">
         <ion-icon name="close"></ion-icon>
@@ -10,11 +10,11 @@
 </ion-header>
 
 <ion-content padding>
-  {{ game.team1Name }}
+  {{ game.team1.name }}
   <br />
   vs
   <br />
-  {{ game.team2Name }}
+  {{ game.team2.name }}
   <br />
   Date: {{ game.date }}
   <br />

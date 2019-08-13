@@ -18,6 +18,7 @@ export class GamesPage implements OnInit {
 
   ngOnInit() {
     this.gamesService.games.subscribe(games => {
+      console.log('games',games);
       this.loadedGames = games;
     });
   }

@@ -11,6 +11,8 @@ const routes: Routes = [
   { path: 'ranks', loadChildren: './pages/ranks/ranks.module#RanksPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canLoad: [AuthGuard] },
   { path: 'selections', loadChildren: './pages/selections/selections.module#SelectionsPageModule', canLoad: [AuthGuard] },
+  { path: 'support', loadChildren: './pages/support/support/support.module#SupportPageModule' },
+  { path: 'support', loadChildren: './pages/support/support.module#SupportPageModule' },
 ];
 
 @NgModule({

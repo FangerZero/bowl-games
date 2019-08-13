@@ -72,8 +72,8 @@ Team.hasMany(TeamRank);
 // Games
 Game.belongsTo(Bowl);
 Bowl.hasMany(Game);
-Game.belongsTo(Team, { as: 'teamID1', foreignKey: 'id' });
-Game.belongsTo(Team, { as: 'teamID2', foreignKey: 'id' });
+Game.belongsTo(Team, { as: 'team1', foreignKey: 'teamId1' });
+Game.belongsTo(Team, { as: 'team2', foreignKey: 'teamId2' });
 
 // Seuqlize Sync, create table
 sequelize
