@@ -4,9 +4,15 @@ const UserSelection = require('../models/userSelection');
  * Get All UserSelections
  */
 exports.getUserSelections = (req, res, next) => {
+    console.log(req);
     UserSelection.findAll().then(userSelections => {
-        res.send(userSelections);
+        res.send(userSelections.dataValues);
     }).catch(err => console.log(err));
+    /*
+    const userId = req.originalUrl.split('/')[2];
+    UserSelection.findAll({ where: { userId } }).then(userSelections => {
+        res.send(userSelections);
+    }).catch(err => console.log(err));*/
 };
 
 /**************

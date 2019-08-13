@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 
 import { GamesService } from './games.service';
 import { Game } from './game.model';
+import { BowlGame } from './bowlGame.model';
 import { GameComponent } from './game/game.component';
 
 @Component({
@@ -11,7 +12,7 @@ import { GameComponent } from './game/game.component';
   styleUrls: ['./games.page.scss'],
 })
 export class GamesPage implements OnInit {
-  loadedGames: Game[];
+  loadedGames: BowlGame[];
 
   constructor(private gamesService: GamesService, private modalCtrl: ModalController) { }
 

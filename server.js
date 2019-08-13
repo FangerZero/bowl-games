@@ -15,9 +15,9 @@ const TeamRank = require('./server/models/teamRank');
 // Get our API routes
 const bowlsRoutes = require('./server/routes/bowls');
 const gamesRoutes = require('./server/routes/games');
-// const teamRanksRoutes = require('./server/routes/team_ranks');
+// const teamRanksRoutes = require('./server/routes/teamRanks');
 const teamsRoutes = require('./server/routes/teams');
-const userSelectionsRoutes = require('./server/routes/user_selections');
+const userSelectionsRoutes = require('./server/routes/userSelections');
 const usersRoutes = require('./server/routes/users');
 
 const app = express();
@@ -42,7 +42,7 @@ app.use('/api/bowls', bowlsRoutes);
 app.use('/api/games', gamesRoutes);
 // app.use('/api/teams/ranks', teamRanksRoutes);
 app.use('/api/teams', teamsRoutes);
-// app.use('/api/users/:id/selections', userSelectionsRoutes);
+app.use('/api/selections', userSelectionsRoutes);
 app.use('/api/users', usersRoutes);
 
 // Catch all other routes and return the index file
@@ -72,8 +72,8 @@ Team.hasMany(TeamRank);
 // Games
 Game.belongsTo(Bowl);
 Bowl.hasMany(Game);
-Game.belongsTo(Team, { as: 'teamID1', foreignKey: 'id' });
-Game.belongsTo(Team, { as: 'teamID2', foreignKey: 'id' });
+Game.belongsTo(Team, { as: 'team1', foreignKey: 'teamId1' });
+Game.belongsTo(Team, { as: 'team2', foreignKey: 'teamId2' });
 
 // Seuqlize Sync, create table
 sequelize

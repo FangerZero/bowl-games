@@ -44,9 +44,8 @@ export class AuthService {
     .subscribe(response => {
       const token = response.token;
       this._token = token;
-      this._authStatusListener.next(true);
-
       if (token) {
+        this._authStatusListener.next(true);
         this.loadingCtrl.create({ keyboardClose: true, message: 'Logging in...' })
         .then(loadingEl => {
           loadingEl.present();

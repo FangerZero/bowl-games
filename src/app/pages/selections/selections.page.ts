@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Selection } from './selection-data.model';
 import { SelectionsService } from './selections.service';
+import { Game } from '../games/game.model';
+import { Bowl } from '../../components/bowls/bowl.model';
 
 @Component({
   selector: 'app-selections',
@@ -10,6 +12,7 @@ import { SelectionsService } from './selections.service';
 })
 export class SelectionsPage implements OnInit {
   loadedSelections: Selection[];
+  loadedGames: Bowl[];
 
   constructor(
     private selectionsService: SelectionsService
@@ -17,8 +20,19 @@ export class SelectionsPage implements OnInit {
 
   ngOnInit() {
     this.selectionsService.selections.subscribe(selections => {
+      console.log('selections:', selections);
       this.loadedSelections = selections;
     });
+    this.selectionsService.games.subscribe(games => {
+      console.log('games:', games);
+      this.loadedGames = games;
+    });
+  }
+
+  onSelectTeam(value, gameId) {
+    console.log('gameId:', gameId);
+    console.log('value:', value.detail.value);
+    this.selectionsService.updateSelection();
   }
 
 }

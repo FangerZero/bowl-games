@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { Game } from '../game.model';
+import { BowlGame } from '../bowlGame.model';
 
 @Component({
   selector: 'app-game',
@@ -9,7 +10,7 @@ import { Game } from '../game.model';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  @Input() game: Game;
+  @Input() game: BowlGame;
 
   constructor(private modalCtrl: ModalController) { }
 

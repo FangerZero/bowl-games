@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button menu="main"></ion-menu-button>
+      </ion-buttons>
     <ion-title>{{ isLogin ? 'Login' : 'Sign-up'}}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -27,6 +30,9 @@
             </ion-list>
             <div text-center>
               <ion-button type="submit" color="primary" expand="block" [disabled]="!login.valid">{{ isLogin ? 'Login' : 'Sign-up'}}</ion-button>
+              <ion-item *ngIf="!isAuthenticated" lines="none">
+                  <ion-label color="danger">Invalid Credentials</ion-label>
+                </ion-item>
               <ion-button type="button" color="primary" fill="clear" expand="block" (click)="onSwitchAuthMode()">{{ isLogin ? 'Sign-up' : 'Login'}}</ion-button>
             </div>
           </ion-col>
