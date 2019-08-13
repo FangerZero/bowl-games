@@ -29,6 +29,7 @@ export class AuthPage implements OnInit, OnDestroy {
   }
 
   onSwitchAuthMode() {
+    this.isAuthenticated = true;
     this.isLogin = !this.isLogin;
   }
 
