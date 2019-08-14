@@ -6,7 +6,7 @@ import { LoadingController } from '@ionic/angular';
 
 import { Selection } from './selection-data.model';
 import { Game } from '../games/game.model';
-import { BowlGame } from './bowlGame.model';
+import { Bowl } from '../../components/bowls/bowl.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +14,14 @@ import { BowlGame } from './bowlGame.model';
 export class SelectionsService {
     // tslint:disable-next-line: variable-name
     private _selections: Selection[];
-    private _games: BowlGame[];
+    private _games: Bowl[];
 
     get selections() {
         return this.http.get<Selection[]>('http://localhost:3000/api/selections/');
     }
 
     get games() {
-      return this.http.get<BowlGame[]>('http://localhost:3000/api/games/');
+      return this.http.get<Bowl[]>('http://localhost:3000/api/games/');
     }
 
     constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
