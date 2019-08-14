@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Selection } from './selection-data.model';
 import { SelectionsService } from './selections.service';
 import { Game } from '../games/game.model';
-import { Bowl } from '../../components/bowls/bowl.model';
+import { Bowl } from '../games/bowl.model';
 
 @Component({
   selector: 'app-selections',

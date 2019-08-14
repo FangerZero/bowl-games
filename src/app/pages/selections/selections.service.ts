@@ -6,7 +6,7 @@ import { LoadingController } from '@ionic/angular';
 
 import { Selection } from './selection-data.model';
 import { Game } from '../games/game.model';
-import { Bowl } from '../../components/bowls/bowl.model';
+import { Bowl } from '../games/bowl.model';
 
 @Injectable({
   providedIn: 'root'
