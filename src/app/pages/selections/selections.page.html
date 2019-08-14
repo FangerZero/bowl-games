@@ -16,12 +16,12 @@
 
       <ion-item lines="none">
         <ion-label>{{ game.team1.name }}</ion-label>
-        <ion-radio slot="start" value="{{game.team1.id}}" ></ion-radio>
+        <ion-radio slot="start" value="{{game.team1.id}}" [checked]="getSelectedTeamId(game.id, game.team1.id)"></ion-radio>
       </ion-item>
 
       <ion-item lines="none">
           <ion-label>{{ game.team2.name }}</ion-label>
-        <ion-radio slot="start" value="{{game.team2.id}}" ></ion-radio>
+        <ion-radio slot="start" value="{{game.team2.id}}" [checked]="getSelectedTeamId(game.id, game.team2.id)"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>

@@ -20,19 +20,34 @@ export class SelectionsPage implements OnInit {
 
   ngOnInit() {
     this.selectionsService.selections.subscribe(selections => {
-      console.log('selections:', selections);
       this.loadedSelections = selections;
     });
     this.selectionsService.games.subscribe(games => {
-      console.log('games:', games);
       this.loadedGames = games;
     });
   }
 
-  onSelectTeam(value, gameId) {
-    console.log('gameId:', gameId);
-    console.log('value:', value.detail.value);
-    this.selectionsService.updateSelection();
+  getSelectedTeamId(gameId: number, teamId: number) {
+    const selectedGame = this.loadedSelections.find(select => gameId === select.gameId);
+    if (!!selectedGame && selectedGame.teamId === teamId) {
+      return true;
+    }
+    return false;
+  }
+
+  onSelectTeam(e, gameId: number) {
+    const gameSelection = { teamId: +e.detail.value, gameId};
+    const selectedGame = this.loadedSelections.find(select => gameId === select.gameId);
+
+    if (this.loadedSelections.length) {
+      if (!!selectedGame) {
+        this.selectionsService.updateSelection(gameSelection);
+      } else {
+        this.selectionsService.createSelection(gameSelection);
+      }
+    } else {
+      this.selectionsService.createSelection(gameSelection);
+    }
   }
 
 }

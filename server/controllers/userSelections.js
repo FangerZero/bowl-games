@@ -4,15 +4,9 @@ const UserSelection = require('../models/userSelection');
  * Get All UserSelections
  */
 exports.getUserSelections = (req, res, next) => {
-    console.log(req);
-    UserSelection.findAll().then(userSelections => {
-        res.send(userSelections.dataValues);
-    }).catch(err => console.log(err));
-    /*
-    const userId = req.originalUrl.split('/')[2];
-    UserSelection.findAll({ where: { userId } }).then(userSelections => {
+    UserSelection.findAll({ where: { userId: req.userData.userId } }).then(userSelections => {
         res.send(userSelections);
-    }).catch(err => console.log(err));*/
+    }).catch(err => console.log(err));
 };
 
 /**************
@@ -31,7 +25,7 @@ exports.createUserSelection = (req, res, next) => {
     const params = req.body;
     UserSelection.create({
         gameId: params.gameId,
-        userId: params.userId,
+        userId: req.userData.userId,
         teamId: params.teamId,
     }).then(result => {
         res.status(201).json({
@@ -44,11 +38,12 @@ exports.createUserSelection = (req, res, next) => {
  * Update UserSelection by ID
  */
 exports.updateUserSelection = (req, res, next) => {
-    UserSelection.findByPk(req.url.slice(1)).then(userSelection => {
+    UserSelection.findOne({ where: { userId: req.userData.userId, gameId: req.body.gameId } })
+    .then(userSelection => {
         userSelection.gameId = req.body.gameId || userSelection.gameId;
         userSelection.userId = req.body.userId || userSelection.userId;
         userSelection.teamId = req.body.teamId || userSelection.teamId;
-        return user.save();
+        return userSelection.save();
     }).then(result => res.send(result))
     .catch(err => console.log(err));
 };
@@ -57,7 +52,7 @@ exports.updateUserSelection = (req, res, next) => {
  * Delete UserSelection by ID
  */
 exports.deleteUserSelection = (req, res, next) => {
-    UserSelection.findByPk(req.url.slice(1))
+    UserSelection.findOne({ where: { userId: req.userData.userId, gameId: req.body.gameId } })
     .then(userSelection => {
         return userSelection.destroy();
     })

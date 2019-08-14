@@ -26,13 +26,17 @@ export class SelectionsService {
 
     constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
 
-    updateSelection() {
-      console.log("UpdateSelection Service/");
-      /*
-      const data = {};
-      this.http.post<>('http://localhost:3000/api/', data)
+    updateSelection(data: object) {
+      this.http.patch('http://localhost:3000/api/selections/', data)
       .subscribe(response => {
-        console.log(response);
-      });*/
+        // console.log(response);
+      });
+    }
+
+    createSelection(data: object) {
+      this.http.post('http://localhost:3000/api/selections/', data)
+      .subscribe(response => {
+        // console.log(response);
+      });
     }
 }
