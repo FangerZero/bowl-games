@@ -1,0 +1,23 @@
+{
+    "name": "College Bowls",
+    "short_name": "College Bowls",
+    "start_url": "/index.html",
+    "scope": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Select what teams you think will win the College Bowl Games!",
+    "lang": "en-US",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/assets/icon/stadium.svg",
+            "type": "image/svg",
+            "sizes": "48x48"
+        },
+        {
+            "src": "/assets/icon/stadium.svg",
+            "type": "image/svg",
+            "sizes": "96x96"
+        }
+    ]
+}
