@@ -12,9 +12,8 @@ import { Bowl } from '../../components/bowls/bowl.model';
   providedIn: 'root'
 })
 export class SelectionsService {
-    // tslint:disable-next-line: variable-name
-    private _selections: Selection[];
-    private _games: Bowl[];
+    // private _selections: Selection[];
+    // private _games: Bowl[];
 
     get selections() {
         return this.http.get<Selection[]>('http://localhost:3000/api/selections/');
@@ -27,16 +26,10 @@ export class SelectionsService {
     constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
 
     updateSelection(data: object) {
-      this.http.patch('http://localhost:3000/api/selections/', data)
-      .subscribe(response => {
-        // console.log(response);
-      });
+      this.http.patch('http://localhost:3000/api/selections/', data).subscribe();
     }
 
     createSelection(data: object) {
-      this.http.post('http://localhost:3000/api/selections/', data)
-      .subscribe(response => {
-        // console.log(response);
-      });
+      this.http.post('http://localhost:3000/api/selections/', data).subscribe();
     }
 }
