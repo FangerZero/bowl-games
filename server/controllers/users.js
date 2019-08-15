@@ -88,7 +88,6 @@ exports.postLogin =  (req, res, next) => {
     let fetchedUser;
     User.findOne({ where: { email: req.body.email} })
         .then(user => {
-            console.log('user');
             if (!user) {
                 return res.status(401).json({
                     message: "Authentication failed."
@@ -97,19 +96,16 @@ exports.postLogin =  (req, res, next) => {
             fetchedUser = user;
             return bcrypt.compare(req.body.password, user.password);
         }).then(result => {
-            console.log('result');
             if(!result) {
                 return res.status(401).json({
                     message: "Authentication failed."
                 });
             }
-            const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.userId}, secretKey, { expiresIn: '1h' });
+            const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id}, secretKey, { expiresIn: '1h' });
             res.status(200).json({ token });
         }).catch(err => {
-            console.log(err);
-            /*return res.status(401).json({
+            return res.status(401).json({
                 message: "Authentication failed."
             });
-            */
         });
 };

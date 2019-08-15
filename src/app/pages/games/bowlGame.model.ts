@@ -1,4 +1,4 @@
-import { Bowl } from 'src/app/components/bowls/bowl.model';
+import { Bowl } from './bowl.model';
 import { Team } from '../teams/team.model';
 
 export class BowlGame {
