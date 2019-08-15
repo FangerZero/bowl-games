@@ -24,5 +24,37 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "teams",
+      "urls": ["http://localhost:3000/api/teams/"],
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "games",
+      "urls": ["http://localhost:3000/api/games/"],
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "selections",
+      "urls": ["http://localhost:3000/api/selections/"],
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    }
   ]
 }
