@@ -12,4 +12,8 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
   }
 
+  onGameSubscribe() {
+    console.log('Subscribe to Games!!');
+  }
+
 }
