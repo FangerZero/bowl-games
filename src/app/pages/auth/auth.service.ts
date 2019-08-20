@@ -20,7 +20,6 @@ export class AuthService {
   }
 
   get token() {
-    console.log('Returning Token: ', this._token);
     return this._token;
   }
 

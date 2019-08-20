@@ -9,7 +9,6 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean>|Promise<boolean>|boolean {
-    console.log('route', route);
     if (!this.authService.token) {
       this.router.navigateByUrl('/auth');
       return false;
