@@ -8,8 +8,10 @@ const secretKey = '720Qu9|&r)/(uCOq!m:P)z*9bDS,2)_qYbLTY7EkAQQk_7ipRWZ2UZIZ1fu_f
  * Get All Users
  */
 exports.getUsers = (req, res, next) => {
-    console.log('getUsers');
-    User.findAll().then(users => {
+    User.findAll({
+        attributes: { exclude: ['password'] }
+      }).then(users => {
+        // delete users.password;
         res.send(users);
     }).catch(err => console.log(err));
 };
@@ -32,7 +34,6 @@ exports.createUser = (req, res, next) => {
     const params = req.body;
     bcrypt.hash(params.password, salt)
         .then(hash => {
-            console.log('Hashed Password');
             User.create({
                 name: params.name || '',
                 alias: params.alias || '',
@@ -53,24 +54,37 @@ exports.createUser = (req, res, next) => {
  * Update User by ID
  */
 exports.updateUser = (req, res, next) => {
-    console.log('updateUser');
-    User.findByPk(req.url.slice(1)).then(user => {
-        user.name = req.body.name || user.name;
-        user.alias = req.body.alias || user.alias;
-        user.email = req.body.email || user.email;
-        user.password = req.body.password || user.password;
-        user.verified = req.body.verified || user.verified;
-        user.paid = req.body.paid || user.paid;
-        return user.save();
-    }).then(result => res.send(result))
-    .catch(err => console.log(err));
+    if (req.body.password) {
+        // Update Password
+        bcrypt.hash(req.body.password, salt)
+        .then(hash => {
+            User.findByPk(req.userData.userId)
+            .then(user => {
+                user.password = hash;
+                return user.save();
+            }).then(result => res.send(result))
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+    } else {
+        User.findByPk(req.userData.userId)
+        .then(user => {
+            user.name = req.body.name || user.name;
+            user.alias = req.body.alias || user.alias;
+            user.email = req.body.email || user.email;
+            // user.password = req.body.password || user.password;
+            user.verified = req.body.verified || user.verified;
+            user.paid = req.body.paid || user.paid;
+            return user.save();
+        }).then(result => res.send(result))
+        .catch(err => console.log(err));
+    }
 };
 
 /**************
  * Delete User by ID
  */
 exports.deleteUser = (req, res, next) => {
-    console.log('deleteUser');
     User.findByPk(req.url.slice(1))
     .then(user => {
         return user.destroy();

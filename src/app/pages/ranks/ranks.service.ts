@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Game } from './game.model';
-import { BowlGame } from './bowlGame.model';
+import { Rank } from '../ranks/rank.model';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GamesService {
-  get games() {
-    return this.http.get<BowlGame[]>(`${environment.api_url}/games/`);
+export class RanksService {
+  get ranks() {
+    return this.http.get<Rank[]>(`${environment.api_url}/users/rank/`);
   }
 
   constructor(private http: HttpClient) { }

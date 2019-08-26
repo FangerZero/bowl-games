@@ -1,0 +1,74 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    }, {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "teams",
+      "urls": ["http://192.168.0.28:3000/api/teams/"],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "games",
+      "urls": ["http://192.168.0.28:3000/api/games/"],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "selections",
+      "urls": ["http://192.168.0.28:3000/api/selections/"],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "ranks",
+      "urls": ["http://192.168.0.28:3000/api/ranks/"],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    }
+  ]
+}

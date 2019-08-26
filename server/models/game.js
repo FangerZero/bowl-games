@@ -21,6 +21,16 @@ const Game = sequelize.define('game', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
+    teamScore1: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
+    teamScore2: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
     date: {
         type: Sequelize.DATE,
         allowNull: true,

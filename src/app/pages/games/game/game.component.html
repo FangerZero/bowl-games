@@ -16,7 +16,9 @@
   <br />
   {{ game.team2.name }}
   <br />
-  Date: {{ game.date }}
+  Date: {{ game.date | date }}
+  <br />
+  Time: {{ game.date | date: 'shortTime' }}
   <br />
   Channel: {{ game.channel }}
   <br />

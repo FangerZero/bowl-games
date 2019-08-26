@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SwPush, SwUpdate } from '@angular/service-worker';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private statusBar: StatusBar,
     private router: Router,
     private authService: AuthService,
+    private swUpdate: SwUpdate,
   ) {
     this.initializeApp();
   }
@@ -30,6 +32,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
       this.loggedIn = isAuthenticated;
     });
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe({next: () => {
+        if (confirm('New version available, Load New Version?')) {
+          window.location.reload();
+        }
+      }});
+    }
   }
 
   ngOnDestroy() {

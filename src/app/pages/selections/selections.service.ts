@@ -4,32 +4,29 @@ import { Router } from '@angular/router';
 
 import { LoadingController } from '@ionic/angular';
 
+import { environment } from '../../../environments/environment';
 import { Selection } from './selection-data.model';
-import { Game } from '../games/game.model';
 import { Bowl } from '../games/bowl.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SelectionsService {
-    // private _selections: Selection[];
-    // private _games: Bowl[];
-
     get selections() {
-        return this.http.get<Selection[]>('http://localhost:3000/api/selections/');
+        return this.http.get<Selection[]>(`${environment.api_url}/selections/`);
     }
 
     get games() {
-      return this.http.get<Bowl[]>('http://localhost:3000/api/games/');
+      return this.http.get<Bowl[]>(`${environment.api_url}/games/`);
     }
 
     constructor(private http: HttpClient, private loadingCtrl: LoadingController, private router: Router) { }
 
     updateSelection(data: object) {
-      this.http.patch('http://localhost:3000/api/selections/', data).subscribe();
+      this.http.patch(`${environment.api_url}/selections/`, data).subscribe();
     }
 
     createSelection(data: object) {
-      this.http.post('http://localhost:3000/api/selections/', data).subscribe();
+      this.http.post(`${environment.api_url}/selections/`, data).subscribe();
     }
 }
