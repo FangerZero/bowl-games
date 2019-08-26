@@ -8,7 +8,38 @@
 </ion-header>
 
 <ion-content>
-  <ion-button color="primary" (click)="onGameSubscribe()">
-    Game Subscribe
-  </ion-button>
+  <ion-grid>
+    <ion-row>
+        <ion-col size-md="4" offset-md="4">
+          <ion-list *ngFor="let profile of loadedProfile">
+            <ion-item>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input value="{{ profile.name }}" (change)="updateName($event.target.value)"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Alias</ion-label>
+              <ion-input value="{{ profile.alias }}" (change)="updateAlias($event.target.value)"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Rank</ion-label>
+              <ion-input *ngIf="(profile.rank !== 0)" disabled="true" value="{{ profile.rank }}"></ion-input>
+              <ion-input *ngIf="(profile.rank === 0)" disabled="true" value="Not Yet Ranked"></ion-input>
+              <ion-button slot="end" *ngIf="!profile.paid" routerLink="/selections">Selections</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" required email value="{{ profile.email }}" (change)="updateEmail($event.target.value)"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input [disabled]="disablePass" type="password" name="password" required minlength="6" (change)="updatePassword($event.target.value)" value="{{ profile.password }}"></ion-input>
+              <ion-button *ngIf="disablePass" slot="end" (click)="editPassword()">Edit</ion-button>
+            </ion-item>
+          </ion-list>
+          <ion-button color="primary" expand="block" (click)="onSubscribe()">
+            Subscribe to Notifications
+          </ion-button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,11 +1,16 @@
 {
   "name": "College Bowls",
   "short_name": "College Bowls",
+  "description": "College Bowl Madness, March Madness but for football",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
+  "serviceworker": {
+    "src": "./ngsw-worker.js"
+  },
+  "categories": ["sports"],
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

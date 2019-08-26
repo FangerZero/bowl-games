@@ -12,9 +12,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './pages/auth/auth-interceptor';
 import { environment } from '../environments/environment';
+import { OrdinalPipe } from './pipes/ordinal.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, OrdinalPipe],
   entryComponents: [],
   imports: [
     BrowserModule,

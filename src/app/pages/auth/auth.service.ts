@@ -4,6 +4,7 @@ import { AuthData } from './auth-data.model';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class AuthService {
 
   createUser(email: string, password: string) {
     const authData: AuthData = { email, password };
-    this.http.post('http://localhost:3000/api/users/', authData)
+    this.http.post(`${environment.api_url}/users/`, authData)
       .subscribe(response => {
         console.log(response);
       });
@@ -39,7 +40,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     const authData: AuthData = { email, password };
-    this.http.post<{token: string}>('http://localhost:3000/api/users/login', authData)
+    this.http.post<{token: string}>(`${environment.api_url}/users/login`, authData)
     .subscribe(response => {
       const token = response.token;
       this._token = token;

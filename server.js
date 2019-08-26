@@ -18,7 +18,9 @@ const gamesRoutes = require('./server/routes/games');
 // const teamRanksRoutes = require('./server/routes/teamRanks');
 const teamsRoutes = require('./server/routes/teams');
 const userSelectionsRoutes = require('./server/routes/userSelections');
+const ranksRoutes = require('./server/routes/ranks');
 const usersRoutes = require('./server/routes/users');
+const notificationsRoutes = require('./server/routes/notifications');
 
 const app = express();
 
@@ -43,7 +45,9 @@ app.use('/api/games', gamesRoutes);
 // app.use('/api/teams/ranks', teamRanksRoutes);
 app.use('/api/teams', teamsRoutes);
 app.use('/api/selections', userSelectionsRoutes);
+app.use('/api/users/ranks', ranksRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/notifications', notificationsRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

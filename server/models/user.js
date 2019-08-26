@@ -25,6 +25,11 @@ const User = sequelize.define('user', {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    rank: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
     verified: {
         type: Sequelize.BOOLEAN,
         allowNull: false,

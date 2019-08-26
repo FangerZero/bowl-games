@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { RanksPage } from './ranks.page';
+import { RankPipe } from 'src/app/pipes/rank.pipe';
 
 const routes: Routes = [
   {
@@ -21,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [RanksPage]
+  declarations: [RanksPage, RankPipe]
 })
 export class RanksPageModule {}

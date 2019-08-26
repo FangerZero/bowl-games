@@ -28,7 +28,8 @@
   "dataGroups": [
     {
       "name": "teams",
-      "urls": ["http://localhost:3000/api/teams/"],
+      "urls": ["http://192.168.0.28:3000/api/teams/"],
+      "version": 1,
       "cacheConfig": {
         "maxSize": 1,
         "maxAge": "2h",
@@ -38,7 +39,8 @@
     },
     {
       "name": "games",
-      "urls": ["http://localhost:3000/api/games/"],
+      "urls": ["http://192.168.0.28:3000/api/games/"],
+      "version": 1,
       "cacheConfig": {
         "maxSize": 1,
         "maxAge": "2h",
@@ -48,7 +50,19 @@
     },
     {
       "name": "selections",
-      "urls": ["http://localhost:3000/api/selections/"],
+      "urls": ["http://192.168.0.28:3000/api/selections/"],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "2h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "ranks",
+      "urls": ["http://192.168.0.28:3000/api/ranks/"],
+      "version": 1,
       "cacheConfig": {
         "maxSize": 1,
         "maxAge": "2h",
