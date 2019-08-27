@@ -48,6 +48,7 @@ export class AuthPage implements OnInit, OnDestroy {
       form.reset();
     } else {
       // Send Request to Sign up
+      // On create user, logs you in and take you to the selections page
       this.authService.createUser(email, password);
     }
   }

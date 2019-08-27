@@ -20,8 +20,20 @@ exports.getUsers = (req, res, next) => {
  * Get User by ID
  */
 exports.getUser = (req, res, next) => {
-    console.log('getUser');
-    User.findByPk(req.url.slice(1)).then(user => {
+    User.findByPk(req.url.slice(1), {
+        attributes: { exclude: ['password'] }
+      }).then(user => {
+        res.send(user.dataValues);
+    }).catch(err => console.log(err));
+};
+
+/**************
+ * Get Profile
+ */
+exports.getProfile = (req, res, next) => {
+    User.findByPk(req.userData.userId, {
+        attributes: { exclude: ['password'] }
+      }).then(user => {
         res.send(user.dataValues);
     }).catch(err => console.log(err));
 };
@@ -30,7 +42,6 @@ exports.getUser = (req, res, next) => {
  * Create New User
  */
 exports.createUser = (req, res, next) => {
-    console.log('createUser');
     const params = req.body;
     bcrypt.hash(params.password, salt)
         .then(hash => {
@@ -67,12 +78,13 @@ exports.updateUser = (req, res, next) => {
         })
         .catch(err => console.log(err));
     } else {
-        User.findByPk(req.userData.userId)
+        User.findByPk(req.userData.userId, {
+            attributes: { exclude: ['password'] }
+          })
         .then(user => {
             user.name = req.body.name || user.name;
             user.alias = req.body.alias || user.alias;
             user.email = req.body.email || user.email;
-            // user.password = req.body.password || user.password;
             user.verified = req.body.verified || user.verified;
             user.paid = req.body.paid || user.paid;
             return user.save();

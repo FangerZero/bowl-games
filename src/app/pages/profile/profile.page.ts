@@ -13,14 +13,13 @@ import { ProfileService } from './profile.service';
 })
 export class ProfilePage implements OnInit {
   readonly VAPID_PUBLIC_KEY = 'BIRnP5XEz-c7EjzVRhXv_VijdP9c-04X7cP-DQfeoZi3XrCKBrS1j17EqGfbhRvmNDI8oCXBWMaNT5-_arSjnvo';
-  loadedProfile: Profile[];
+  loadedProfile: Profile;
   disablePass = true;
 
   constructor(private profileService: ProfileService, private http: HttpClient, private swPush: SwPush) { }
 
   ngOnInit() {
     this.profileService.profile.subscribe(profile => {
-      profile[0].password = '';
       this.loadedProfile = profile;
     });
   }

@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 })
 export class ProfileService {
   get profile() {
-    return this.http.get<Profile[]>(`${environment.api_url}/users/`);
+    return this.http.get<Profile>(`${environment.api_url}/users/profile`);
   }
 
   constructor(private http: HttpClient) { }
