@@ -9,9 +9,8 @@ import { AuthService } from '../auth/auth.service';
 export class AdminGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean>|Promise<boolean>|boolean {
-    console.log('adminGuard: ', this.authService.userIsAdmin);
     if (!this.authService.userIsAdmin) {
-      // this.router.navigateByUrl('/auth');
+      this.router.navigateByUrl('/auth');
       return false;
     }
     return true;

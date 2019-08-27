@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './pages/auth/auth.guard';
+import { AdminGuard } from './pages/admin/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,10 +13,10 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canLoad: [AuthGuard] },
   { path: 'selections', loadChildren: './pages/selections/selections.module#SelectionsPageModule', canLoad: [AuthGuard] },
   { path: 'support', loadChildren: './pages/support/support.module#SupportPageModule' },
-  { path: 'admin/games', loadChildren: './pages/admin/games/games.module#GamesPageModule', canLoad: [AuthGuard] },
-  { path: 'admin/teams', loadChildren: './pages/admin/teams/teams.module#TeamsPageModule', canLoad: [AuthGuard] },
-  { path: 'admin/bowls', loadChildren: './pages/admin/bowls/bowls.module#BowlsPageModule', canLoad: [AuthGuard] },
-  { path: 'admin', loadChildren: './pages/admin/admin.module#AdminPageModule', canLoad: [AuthGuard] },
+  { path: 'admin/games', loadChildren: './pages/admin/games/games.module#GamesPageModule', canLoad: [AuthGuard, AdminGuard] },
+  { path: 'admin/teams', loadChildren: './pages/admin/teams/teams.module#TeamsPageModule', canLoad: [AuthGuard, AdminGuard] },
+  { path: 'admin/bowls', loadChildren: './pages/admin/bowls/bowls.module#BowlsPageModule', canLoad: [AuthGuard, AdminGuard] },
+  { path: 'admin', loadChildren: './pages/admin/admin.module#AdminPageModule', canLoad: [AuthGuard, AdminGuard] },
 ];
 
 @NgModule({
