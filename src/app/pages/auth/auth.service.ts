@@ -4,7 +4,7 @@ import { AuthData } from './auth-data.model';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,7 @@ export class AuthService {
     this.http.post(`${environment.api_url}/users/`, authData)
       .subscribe(response => {
         console.log(response);
+        // this.login(email, password);
       });
   }
 

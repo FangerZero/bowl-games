@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoadingController } from '@ionic/angular';
 
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { Selection } from './selection-data.model';
 import { Bowl } from '../games/bowl.model';
 
