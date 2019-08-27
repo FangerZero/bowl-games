@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
+import { TeamsService } from '../teams.service';
+import { Team } from '../team.model';
 
 @Component({
   selector: 'app-edit',
@@ -6,10 +11,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit.page.scss'],
 })
 export class EditPage implements OnInit {
+  loadedTeam: Team;
+  id: number;
 
-  constructor() { }
+  constructor(private teamsService: TeamsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.id = +params.get('id');
+    });
+
+    this.teamsService.getTeam(this.id).subscribe(team => {
+      this.loadedTeam = team;
+    });
+  }
+
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+
+    const name = form.value.teamName;
+    const mascot = form.value.teamMascot;
+    const city = form.value.teamCity;
+    const state = form.value.teamState;
+    const rank = form.value.teamRank;
+    this.teamsService.updateTeam(this.id, name, mascot, city, state, rank);
   }
 
 }

@@ -133,9 +133,7 @@ exports.postLogin =  (req, res, next) => {
             } else {
                 token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id}, secretKey, { expiresIn: '1h' });
             }
-            console.log('');
-            console.log('fetchedUser.admin', fetchedUser.admin);
-            console.log('');
+            
             res.status(200).json({ token, isAdmin: fetchedUser.admin });
         }).catch(err => {
             return res.status(401).json({

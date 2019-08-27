@@ -16,13 +16,13 @@ const routes: Routes = [
   { path: 'support', loadChildren: './pages/support/support.module#SupportPageModule' },
   // Admin
   { path: 'admin/games/new', loadChildren: './pages/admin/games/new/new.module#NewPageModule', canLoad: [AuthGuard, AdminGuard] },
-  { path: 'admin/games/edit', loadChildren: './pages/admin/games/edit/edit.module#EditPageModule', canLoad: [AuthGuard, AdminGuard] },
+  { path: 'admin/games/edit/:id', loadChildren: './pages/admin/games/edit/edit.module#EditPageModule', canLoad: [AuthGuard, AdminGuard] },
   { path: 'admin/games', loadChildren: './pages/admin/games/games.module#GamesPageModule', canLoad: [AuthGuard, AdminGuard] },
   { path: 'admin/teams/new', loadChildren: './pages/admin/teams/new/new.module#NewPageModule', canLoad: [AuthGuard, AdminGuard] },
-  { path: 'admin/teams/edit', loadChildren: './pages/admin/teams/edit/edit.module#EditPageModule', canLoad: [AuthGuard, AdminGuard] },
+  { path: 'admin/teams/edit/:id', loadChildren: './pages/admin/teams/edit/edit.module#EditPageModule', canLoad: [AuthGuard, AdminGuard] },
   { path: 'admin/teams', loadChildren: './pages/admin/teams/teams.module#TeamsPageModule', canLoad: [AuthGuard, AdminGuard] },
   { path: 'admin/bowls/new', loadChildren: './pages/admin/bowls/new/new.module#NewPageModule', canLoad: [AuthGuard, AdminGuard] },
-  { path: 'admin/bowls/edit', loadChildren: './pages/admin/bowls/edit/edit.module#EditPageModule', canLoad: [AuthGuard, AdminGuard] },
+  { path: 'admin/bowls/edit/:id', loadChildren: './pages/admin/bowls/edit/edit.module#EditPageModule', canLoad: [AuthGuard, AdminGuard] },
   { path: 'admin/bowls', loadChildren: './pages/admin/bowls/bowls.module#BowlsPageModule', canLoad: [AuthGuard, AdminGuard] },
   // { path: 'admin', loadChildren: './pages/admin/admin.module#AdminPageModule', canLoad: [AuthGuard, AdminGuard] },
 ];

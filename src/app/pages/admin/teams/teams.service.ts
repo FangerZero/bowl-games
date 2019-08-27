@@ -3,20 +3,30 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { TeamData } from './team-data.model';
+import { Team } from './team.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamsService {
+  get teams() {
+    return this.http.get<Team[]>(`${environment.api_url}/teams/`);
+  }
 
   constructor(private http: HttpClient) { }
 
+  getTeam(id: number) {
+    return this.http.get<Team>(`${environment.api_url}/teams/${id}`);
+  }
+
   createTeam(name: string, mascot: string, city: string, state: string, rank: number) {
     const teamData: TeamData = {name, mascot, city, state, rank};
-    this.http.post(`${environment.api_url}/teams/`, teamData)
-      .subscribe(response => {
-        console.log(response);
-      });
+    this.http.post(`${environment.api_url}/teams/`, teamData).subscribe();
+  }
+
+  updateTeam(id: number, name: string, mascot: string, city: string, state: string, rank: number) {
+    const teamData: TeamData = {name, mascot, city, state, rank};
+    this.http.patch(`${environment.api_url}/teams/${id}`, teamData).subscribe();
   }
 }
