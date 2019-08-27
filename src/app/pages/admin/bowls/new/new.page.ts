@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { BowlsService } from '../bowls.service';
 
 @Component({
   selector: 'app-new',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewPage implements OnInit {
 
-  constructor() { }
+  constructor(private bowlsService: BowlsService) { }
 
   ngOnInit() {
   }
 
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+
+    const name = form.value.bowlName;
+    this.bowlsService.createBowl(name);
+    form.reset();
+  }
 }
