@@ -51,12 +51,14 @@ export class ProfilePage implements OnInit {
    */
 
   onSubscribe() {
-    console.log('Subscribe to Games!!');
+    alert('Functionality disabled');
+    /*
     this.swPush.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY
     })
     .then(sub => this.sendToServer(sub))
     .catch(err => console.error('Could not subscribe to notifications', err));
+    */
   }
 
   sendToServer(params: any) {

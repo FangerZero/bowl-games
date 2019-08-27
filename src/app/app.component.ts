@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
   loggedIn = false;
+  isAdmin = false;
   private authListenerSubs: Subscription;
 
   constructor(
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
       this.loggedIn = isAuthenticated;
     });
+    // Updating something
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe({next: () => {
         if (confirm('New version available, Load New Version?')) {
@@ -54,6 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
+    this.loggedIn = false;
     this.authService.logout();
     this.router.navigateByUrl('/auth');
   }

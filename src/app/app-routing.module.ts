@@ -12,6 +12,10 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canLoad: [AuthGuard] },
   { path: 'selections', loadChildren: './pages/selections/selections.module#SelectionsPageModule', canLoad: [AuthGuard] },
   { path: 'support', loadChildren: './pages/support/support.module#SupportPageModule' },
+  { path: 'admin', loadChildren: './pages/admin/admin.module#AdminPageModule', canLoad: [AuthGuard] },
+  { path: 'games', loadChildren: './pages/admin/games/games.module#GamesPageModule', canLoad: [AuthGuard] },
+  { path: 'teams', loadChildren: './pages/admin/teams/teams.module#TeamsPageModule', canLoad: [AuthGuard] },
+  { path: 'bowls', loadChildren: './pages/admin/bowls/bowls.module#BowlsPageModule', canLoad: [AuthGuard] },
 ];
 
 @NgModule({

@@ -10,6 +10,7 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle menu="main">
+          <!-- Info -->
           <ion-item lines="none" routerLink="/games">
             <ion-icon name="american-football" slot="start"></ion-icon>
             <ion-label>Games</ion-label>
@@ -26,6 +27,7 @@
               <ion-icon name="help-circle" slot="start"></ion-icon>
             <ion-label>Support</ion-label>
           </ion-item>
+          <!-- Account -->
           <ion-item lines="none" routerLink="/profile" *ngIf="loggedIn">
             <ion-icon name="contact" slot="start"></ion-icon>
             <ion-label>Profile</ion-label>
@@ -34,13 +36,30 @@
             <ion-icon name="list-box" slot="start"></ion-icon>
             <ion-label>Selections</ion-label>
           </ion-item>
-          <ion-item lines="none" (click)="onLogout()" button *ngIf="loggedIn">
+          <ion-item lines="none" (click)="onLogout()" button *ngIf="loggedIn && !isAdmin">
+            <ion-icon name="log-out" slot="start"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+          <ion-item (click)="onLogout()" button *ngIf="loggedIn && isAdmin">
             <ion-icon name="log-out" slot="start"></ion-icon>
             <ion-label>Logout</ion-label>
           </ion-item>
           <ion-item lines="none" routerLink="/auth" *ngIf="!loggedIn">
             <ion-icon name="log-in" slot="start"></ion-icon>
             <ion-label>Login</ion-label>
+          </ion-item>
+          <!-- Admin -->
+          <ion-item lines="none" routerLink="/admin/bowls" *ngIf="isAdmin">
+            <ion-icon name="map" slot="start"></ion-icon>
+            <ion-label>Bowls</ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/admin/games" *ngIf="isAdmin">
+            <ion-icon name="american-football" slot="start"></ion-icon>
+            <ion-label>Games</ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/admin/teams" *ngIf="isAdmin">
+            <ion-icon name="school" slot="start"></ion-icon>
+            <ion-label>Teams</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
