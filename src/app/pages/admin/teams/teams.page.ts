@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { TeamsService } from './teams.service';
 import { Team } from './team.model';
@@ -12,9 +11,8 @@ import { Team } from './team.model';
 })
 export class TeamsPage implements OnInit {
   loadedTeams: Team[];
-  private placeSub: Subscription;
 
-  constructor(private teamsService: TeamsService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private teamsService: TeamsService, private router: Router) { }
 
   ngOnInit() {
     this.teamsService.teams.subscribe(teams => {
