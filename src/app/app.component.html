@@ -53,13 +53,13 @@
             <ion-icon name="map" slot="start"></ion-icon>
             <ion-label>Bowl Management</ion-label>
           </ion-item>
-          <ion-item lines="none" routerLink="/admin/games" *ngIf="isAdmin">
-            <ion-icon name="american-football" slot="start"></ion-icon>
-            <ion-label>Game Management</ion-label>
-          </ion-item>
           <ion-item lines="none" routerLink="/admin/teams" *ngIf="isAdmin">
             <ion-icon name="school" slot="start"></ion-icon>
             <ion-label>Team Management</ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/admin/games" *ngIf="isAdmin">
+            <ion-icon name="american-football" slot="start"></ion-icon>
+            <ion-label>Game Management</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
