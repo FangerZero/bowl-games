@@ -11,13 +11,15 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   // tslint:disable-next-line: variable-name
-  private _userIsAuthenticated = false;
+  private _userIsAdmin = false;
   private _token: string;
   // Push Token to Interested Components
   private _authStatusListener = new Subject<boolean>();
+  private _adminStatusListener = new Subject<boolean>();
 
-  get userIsAuthenticated() {
-    return this._userIsAuthenticated;
+  get userIsAdmin() {
+    console.log('userIsAdmin', this._userIsAdmin);
+    return this._userIsAdmin;
   }
 
   get token() {
@@ -30,6 +32,10 @@ export class AuthService {
     return this._authStatusListener.asObservable();
   }
 
+  getAdminStatusListener() {
+    return this._adminStatusListener.asObservable();
+  }
+
   createUser(email: string, password: string) {
     const authData: AuthData = { email, password };
     this.http.post(`${environment.api_url}/users/`, authData)
@@ -40,8 +46,11 @@ export class AuthService {
 
   login(email: string, password: string) {
     const authData: AuthData = { email, password };
-    this.http.post<{token: string}>(`${environment.api_url}/users/login`, authData)
+    this.http.post<{token: string, isAdmin: boolean}>(`${environment.api_url}/users/login`, authData)
     .subscribe(response => {
+      this._userIsAdmin = response.isAdmin;
+      this._adminStatusListener.next(response.isAdmin);
+
       const token = response.token;
       this._token = token;
       if (token) {
@@ -54,12 +63,10 @@ export class AuthService {
         });
       }
     });
-
-    this._userIsAuthenticated = true;
   }
 
   logout() {
-    this._userIsAuthenticated = false;
+    this._userIsAdmin = false;
     this._token = undefined;
   }
 }

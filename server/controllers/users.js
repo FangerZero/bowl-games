@@ -127,13 +127,16 @@ exports.postLogin =  (req, res, next) => {
                     message: "Authentication failed."
                 });
             }
+            let token;
             if (fetchedUser.admin) {
-                const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id, admin: true}, secretKey, { expiresIn: '1h' });
+                token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id, admin: true}, secretKey, { expiresIn: '1h' });
             } else {
-                const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id}, secretKey, { expiresIn: '1h' });
+                token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id}, secretKey, { expiresIn: '1h' });
             }
-            
-            res.status(200).json({ token });
+            console.log('');
+            console.log('fetchedUser.admin', fetchedUser.admin);
+            console.log('');
+            res.status(200).json({ token, isAdmin: fetchedUser.admin });
         }).catch(err => {
             return res.status(401).json({
                 message: "Authentication failed."
