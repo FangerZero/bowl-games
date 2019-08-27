@@ -18,7 +18,6 @@ export class AuthService {
   private _adminStatusListener = new Subject<boolean>();
 
   get userIsAdmin() {
-    console.log('userIsAdmin', this._userIsAdmin);
     return this._userIsAdmin;
   }
 
