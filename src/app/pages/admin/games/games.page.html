@@ -13,5 +13,9 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-list *ngFor="let game of loadedGames">
+      <ion-item (click)="onEditGame(this.game.id)">
+        {{ game.id }}
+      </ion-item>
+    </ion-list>
 </ion-content>
