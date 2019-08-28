@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 
+import { BowlsService } from '../bowls/bowls.service';
+import { Bowl } from '../bowls/bowl.model';
+import { TeamsService } from '../../teams/teams.service';
+import { Team } from '../../teams/team.model';
 import { GamesService } from './games.service';
 import { Game } from './game.model';
+
 
 @Component({
   selector: 'app-games',
@@ -12,8 +17,10 @@ import { Game } from './game.model';
 })
 export class GamesPage implements OnInit {
   loadedGames: Game[];
+  loadedTeams: Team[];
+  loadedBowls: Bowl[];
 
-  constructor(private gamesService: GamesService, private router: Router) { }
+  constructor(private gamesService: GamesService, private teamsService: TeamsService, private bowlsService: BowlsService, private router: Router) { }
 
   ngOnInit() {
     this.gamesService.games.subscribe(games => {
@@ -23,10 +30,25 @@ export class GamesPage implements OnInit {
         return 0;
       });
     });
+
+    this.teamsService.teams.subscribe(teams => {
+      this.loadedTeams = teams.sort((a,b) => {
+        if(a.name < b.name) { return -1; }
+        if(a.name > b.name) { return 1; }
+        return 0;
+      });
+    });
+
+    this.bowlsService.bowls.subscribe(bowls => {
+      this.loadedBowls = bowls.sort((a,b) => {
+        if(a.name < b.name) { return -1; }
+        if(a.name > b.name) { return 1; }
+        return 0;
+      });
+    });
   }
 
   onEditGame(gameId: number) {
     this.router.navigateByUrl(`admin/games/edit/${gameId}`);
   }
-
 }

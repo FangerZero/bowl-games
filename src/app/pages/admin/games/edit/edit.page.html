@@ -14,22 +14,30 @@
         <ion-col size-md="4" offset-md="4">
           <ion-list>
             <ion-item>
-                <ion-label position="floating">Bowl</ion-label>
-                <ion-select ngModel="{{ loadedGame.bowlId }}"  name="gameBowl" placeholder="Select Bowl" required>
-                  <ion-select-option *ngFor="let bowl of loadedBowls" value="{{ bowl.id }}">{{ bowl.name }}</ion-select-option>
-                </ion-select>
+              <ion-label position="floating">Bowl</ion-label>
+              <ion-select ngModel="{{ loadedGame.bowlId }}"  name="gameBowl" placeholder="Select Bowl" required>
+                <ion-select-option *ngFor="let bowl of loadedBowls" value="{{ bowl.id }}">{{ bowl.name }}</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item>
-                <ion-label position="floating">Team 1</ion-label>
-                <ion-select ngModel="{{ loadedGame.teamId1 }}" name="gameTeam1" placeholder="Select Team" required>
-                  <ion-select-option *ngFor="let team of loadedTeams" value="{{ team.id }}">{{ team.name }}</ion-select-option>
-                </ion-select>
+              <ion-label position="floating">Team 1</ion-label>
+              <ion-select ngModel="{{ loadedGame.teamId1 }}" name="gameTeam1" placeholder="Select Team" required>
+                <ion-select-option *ngFor="let team of loadedTeams" value="{{ team.id }}">{{ team.name }}</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item>
-                <ion-label position="floating">Team 2</ion-label>
-                <ion-select ngModel="{{ loadedGame.teamId2 }}" name="gameTeam2" placeholder="Select Team" required>
-                  <ion-select-option *ngFor="let team of loadedTeams" value="{{ team.id }}">{{ team.name }}</ion-select-option>
-                </ion-select>
+              <ion-label position="floating">Team 2</ion-label>
+              <ion-select ngModel="{{ loadedGame.teamId2 }}" name="gameTeam2" placeholder="Select Team" required>
+                <ion-select-option *ngFor="let team of loadedTeams" value="{{ team.id }}">{{ team.name }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Team 1 Score</ion-label>
+              <ion-input ngModel="{{ loadedGame.teamScore1 }}" name="gameScore1" type="number" min="0" max="100"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Team 2 Score</ion-label>
+              <ion-input ngModel="{{ loadedGame.teamScore2 }}" name="gameScore2" type="number" min="0" max="100"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Points</ion-label>
@@ -37,7 +45,7 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">Channel</ion-label>
-              <ion-input ngModel="{{ loadedGame.channel }}" name="gameChannel" required></ion-input>
+              <ion-input ngModel="{{ loadedGame.channel }}" name="gameChannel"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Date</ion-label>

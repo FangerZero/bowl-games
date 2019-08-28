@@ -4,6 +4,8 @@ export class Game {
         public bowlId: number,
         public teamId1: number,
         public teamId2: number,
+        public teamScore1: number,
+        public teamScore2: number,
         public date: Date,
         public channel: string,
         public points: number,

@@ -19,16 +19,18 @@ export class GamesService {
     return this.http.get<Game>(`${environment.api_url}/games/${id}`);
   }
 
-  createGame(bowlId: number, teamId1: number, teamId2: number, date: Date, channel: string, points: number) {
-    const gameData: GameData = {bowlId, teamId1, teamId2, date, channel, points};
-
+  createGame(bowlId: number, teamId1: number, teamId2: number, teamScore1: number, teamScore2: number, date: Date, channel: string, points: number) {
+    const gameData: GameData = {bowlId, teamId1, teamId2, teamScore1, teamScore2, date, channel, points};
     this.http.post(`${environment.api_url}/games/`, gameData).subscribe(
       response => { console.log(response); }
     );
   }
 
-  updateGame(id: number, bowlId: number, teamId1: number, teamId2: number, date: Date, channel: string, points: number) {
-    const gameData: GameData = {bowlId, teamId1, teamId2, date, channel, points};
-    this.http.patch(`${environment.api_url}/games/${id}`, gameData).subscribe();
+  updateGame(id: number, bowlId: number, teamId1: number, teamId2: number, teamScore1: number, teamScore2: number, date: Date, channel: string, points: number) {
+    const gameData: GameData = {bowlId, teamId1, teamId2, teamScore1, teamScore2, date, channel, points};
+    console.log('gameData', gameData);
+    this.http.patch(`${environment.api_url}/games/${id}`, gameData).subscribe(
+      response => { console.log(response); }
+    );
   }
 }
