@@ -33,4 +33,11 @@ export class GamesService {
       response => { console.log(response); }
     );
   }
+
+  updateUserRank() {
+    console.log('update user please');
+    this.http.get(`${environment.api_url}/users/ranks/set`).subscribe(
+      response => { console.log(response); }
+    );
+  }
 }

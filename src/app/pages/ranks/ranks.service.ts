@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RanksService {
   get ranks() {
-    return this.http.get<Rank[]>(`${environment.api_url}/users/rank/`);
+    return this.http.get<Rank[]>(`${environment.api_url}/users/ranks/`);
   }
 
   constructor(private http: HttpClient) { }

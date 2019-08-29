@@ -72,6 +72,7 @@ export class EditPage implements OnInit {
     const points = form.value.gamePoints;
 
     this.gamesService.updateGame(this.id, bowlId, team1Id, team2Id, teamScore1, teamScore2,  date, channel, points);
+    this.gamesService.updateUserRank();
   }
 
 }
