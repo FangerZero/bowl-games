@@ -26,6 +26,10 @@ export class SelectionsPage implements OnInit {
     });
   }
 
+  getDisabled(date: Date) {
+    return new Date(date) < new Date();
+  }
+
   getSelectedTeamId(gameId: number, teamId: number) {
     const selectedGame = this.loadedSelections.find(select => gameId === select.gameId);
     if (!!selectedGame && selectedGame.teamId === teamId) {
