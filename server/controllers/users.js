@@ -51,6 +51,7 @@ exports.createUser = (req, res, next) => {
                 email: params.email,
                 password: hash,
                 verified: false,
+                points: 0,
                 paid: false,
                 admin: false,
             }).then(result => {

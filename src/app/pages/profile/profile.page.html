@@ -21,8 +21,8 @@
               <ion-input value="{{ loadedProfile.alias }}" (change)="updateAlias($event.target.value)"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="floating">Rank</ion-label>
-              <ion-input *ngIf="(loadedProfile.rank !== 0)" disabled="true" value="{{ loadedProfile.rank }}"></ion-input>
+              <ion-label position="floating">Rank/Points</ion-label>
+              <ion-input *ngIf="(loadedProfile.rank !== 0)" disabled="true" value="{{ loadedProfile.rank }} - {{ loadedProfile.points }} pts."></ion-input>
               <ion-input *ngIf="(loadedProfile.rank === 0)" disabled="true" value="Not Yet Ranked"></ion-input>
               <ion-button slot="end" *ngIf="!loadedProfile.paid" routerLink="/selections">Selections</ion-button>
             </ion-item>

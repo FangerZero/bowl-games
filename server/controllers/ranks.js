@@ -15,12 +15,12 @@ exports.getRanks = (req, res, next) => {
         let sameRank = [];
         let retVal = [];
         results.map((result, index) => {
-            // Need to add Points to Table, and move the "rank" to points and put rank in rank. 
-            if (!results[index+1] || result.rank > results[index+1].rank) {
-                retVal.push({ name: result.alias || result.name, points: results[index].rank, rank});
+            // Need to simiply setRanks in Database, and call that
+            if (!results[index+1] || result.points > results[index+1].points) {
+                retVal.push({ name: result.alias || result.name, points: results[index].points, rank});
                 if (sameRank.length) {
                     sameRank.map(sri => {
-                        retVal.push({ name: results[sri].alias || results[sri].name, points: results[sri].rank, rank});
+                        retVal.push({ name: results[sri].alias || results[sri].name, points: results[sri].points, rank});
                     });
                     sameRank = [];
                 }
@@ -98,7 +98,7 @@ exports.setRanks = (req, res, next) => {
                     attributes: { exclude: ['password'] }
                   })
                 .then(user => {
-                    user.rank = points;
+                    user.points = points;
                     return user.save();
                 }).catch(err => console.log(err));
             }
