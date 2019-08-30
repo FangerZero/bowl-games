@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthData } from './auth-data.model';
+import { AuthSignupData } from './auth-signup-data.model';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -35,12 +36,11 @@ export class AuthService {
     return this._adminStatusListener.asObservable();
   }
 
-  createUser(email: string, password: string) {
-    const authData: AuthData = { email, password };
+  createUser(email: string, password: string, name: string, alias: string) {
+    const authData: AuthSignupData = { email, password, name, alias };
     this.http.post(`${environment.api_url}/users/`, authData)
       .subscribe(response => {
-        console.log(response);
-        // this.login(email, password);
+        this.login(email, password);
       });
   }
 

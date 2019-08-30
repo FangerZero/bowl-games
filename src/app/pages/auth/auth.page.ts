@@ -47,9 +47,11 @@ export class AuthPage implements OnInit, OnDestroy {
       this.authService.login(email, password);
       form.reset();
     } else {
+      const name = form.value.name;
+      const alias = form.value.alias || '';
       // Send Request to Sign up
       // On create user, logs you in and take you to the selections page
-      this.authService.createUser(email, password);
+      this.authService.createUser(email, password, name, alias);
     }
   }
 
