@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list *ngFor="let game of loadedGames">
     <ion-radio-group (ionSelect)="onSelectTeam($event, game.id)">
       <ion-list-header>

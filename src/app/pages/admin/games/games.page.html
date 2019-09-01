@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
     <ion-list *ngFor="let game of loadedGames">
       <ion-item (click)="onEditGame(this.game.id)">
         {{ game.id }}

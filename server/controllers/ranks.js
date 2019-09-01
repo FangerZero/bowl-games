@@ -104,7 +104,6 @@ exports.setPoints = (req, res, next) => {
                     attributes: { exclude: ['password'] }
                   })
                 .then(user => {
-                    // Need to add Points to Table, and move the "rank" to points and put rank in rank. 
                     user.points = points;
                     return user.save();
                 }).catch(err => console.log(err));
