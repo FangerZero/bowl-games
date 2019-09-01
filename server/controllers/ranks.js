@@ -6,30 +6,15 @@ const { Op } = require('sequelize');
 
 exports.getRanks = (req, res, next) => {
     User.findAll({
-        attributes: { exclude: ['password'] },
+        attributes: { includ: ['alias', 'name', 'points', 'rank'], exclude: ['password'] },
         order: [
-            ['rank', 'DESC']
+            ['points', 'DESC']
         ]
-    }).then(results => {
-        let rank = 1;
-        let sameRank = [];
-        let retVal = [];
-        results.map((result, index) => {
-            // Need to simiply setRanks in Database, and call that
-            if (!results[index+1] || result.points > results[index+1].points) {
-                retVal.push({ name: result.alias || result.name, points: results[index].points, rank});
-                if (sameRank.length) {
-                    sameRank.map(sri => {
-                        retVal.push({ name: results[sri].alias || results[sri].name, points: results[sri].points, rank});
-                    });
-                    sameRank = [];
-                }
-            } else {
-                sameRank.push(index);
-            }
-            rank++;
+    }).then(users => {
+        users.forEach(user => {
+            user.name = user.alias !== '' ? user.alias : user.name;
         });
-        res.send(retVal);
+        res.send(users);
     }).catch(err => console.log(err));
 };
 
@@ -37,6 +22,47 @@ exports.getRanks = (req, res, next) => {
  * Set All Ranks
  */
 exports.setRanks = (req, res, next) => {
+    User.findAll({
+        attributes: ['id', 'rank', 'points'],
+        order: [
+            ['points', 'DESC']
+        ]
+    }).then(users => {
+        let rank = 0;
+        let sameRank = [];
+        users.map((user, index) => {
+            rank++;
+            if (!users[index+1] || user.points > users[index+1].points) {
+                if (+user.points === 0) {
+                    users[index].rank = `0`;
+                } else {
+                    users[index].rank = `${rank}`;
+                    if (sameRank.length) {
+                        sameRank.map(sri => {
+                            users[sri].rank = `${rank}`;
+                        });
+                        sameRank = [];
+                    }
+                }
+            } else {
+                sameRank.push(index);
+            }
+        });
+        return users;
+    }).then(users => {
+        users.forEach(user => {
+            return user.save();
+        });
+        res.status(201).json({
+            message: 'User Ranks Updated'
+        });
+    }).catch(err => console.log(err));
+};
+
+/**************
+ * Set All Points
+ */
+exports.setPoints = (req, res, next) => {
     UserSelection.findAll({
         attributes: ['userId','teamId'],
         include: [{
@@ -79,7 +105,7 @@ exports.setRanks = (req, res, next) => {
                   })
                 .then(user => {
                     // Need to add Points to Table, and move the "rank" to points and put rank in rank. 
-                    user.rank = points;
+                    user.points = points;
                     return user.save();
                 }).catch(err => console.log(err));
 
@@ -103,29 +129,8 @@ exports.setRanks = (req, res, next) => {
                 }).catch(err => console.log(err));
             }
         });
-        res.send('User Ranks Updated');
-        /*
-        User.findAll({ attributes: ['id', 'alias', 'name']
-        }).then(users => {
-            let gameSelections = [];
-            users.map(user => {
-                let points = 0;
-                name = user.alias || user.name;
-                selections.map(selection => {
-                    let data = selection.game.dataValues;
-                    if (selection.userId === user.id) {
-                        if (data.teamScore1 === data.teamScore2) {
-                            points+= data.points/2;
-                        } else {
-                            points+= data.points;
-                        }
-                    }
-                });
-                gameSelections.push({ userId: user.id, name, points });
-            });
-            gameSelections.sort((a,b) => b.points - a.points);
-            res.send(gameSelections);
-        }).catch(err => console.log(err));
-        */
+        res.status(201).json({
+            message: 'User Points Updated'
+        });
     }).catch(err => console.log(err));
 };

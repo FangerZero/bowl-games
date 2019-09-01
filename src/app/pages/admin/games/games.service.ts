@@ -28,16 +28,20 @@ export class GamesService {
 
   updateGame(id: number, bowlId: number, teamId1: number, teamId2: number, teamScore1: number, teamScore2: number, date: Date, channel: string, points: number) {
     const gameData: GameData = {bowlId, teamId1, teamId2, teamScore1, teamScore2, date, channel, points};
-    console.log('gameData', gameData);
     this.http.patch(`${environment.api_url}/games/${id}`, gameData).subscribe(
-      response => { console.log(response); }
+      response => { console.log('resposne:', response); }
     );
   }
 
   updateUserRank() {
-    console.log('update user please');
-    this.http.get(`${environment.api_url}/users/ranks/set`).subscribe(
-      response => { console.log(response); }
+    this.http.get(`${environment.api_url}/users/ranks/set/rank`).subscribe(
+      response => { console.log('resposne:', response); }
+    );
+  }
+
+  updateUserPoints() {
+    this.http.get(`${environment.api_url}/users/ranks/set/points`).subscribe(
+      response => { console.log('resposne:', response); }
     );
   }
 }
