@@ -44,6 +44,22 @@ export class AuthService {
       });
   }
 
+  autoLogin() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    console.log('userData', userData);
+
+    if (userData.token) {
+      this._token = userData.token;
+      this._authStatusListener.next(true);
+
+      this._userIsAdmin = userData.admin || false;
+      this._adminStatusListener.next(userData.admin || false);
+    }
+  }
+
   login(email: string, password: string) {
     const authData: AuthData = { email, password };
     this.http.post<{token: string, isAdmin: boolean}>(`${environment.api_url}/users/login`, authData)
@@ -54,7 +70,16 @@ export class AuthService {
       const token = response.token;
       this._token = token;
       if (token) {
-        this._authStatusListener.next(true);
+        // Stay Logged in on Reload
+        let userData = {};
+        if (this._userIsAdmin) {
+          userData = { admin: true, token };
+        } else {
+          userData = { token };
+        }
+        localStorage.setItem('userData', JSON.stringify(userData))
+
+        this._authStatusListener.next(true);;
         this.loadingCtrl.create({ keyboardClose: true, message: 'Logging in...' })
         .then(loadingEl => {
           loadingEl.present();
@@ -68,5 +93,6 @@ export class AuthService {
   logout() {
     this._userIsAdmin = false;
     this._token = undefined;
+    localStorage.clear();
   }
 }

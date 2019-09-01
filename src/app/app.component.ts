@@ -32,6 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.authService.autoLogin();
     this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
       this.loggedIn = isAuthenticated;
     });
@@ -58,6 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.loggedIn = !!this.authService.token;
+      this.isAdmin = !!this.authService.userIsAdmin;
     });
   }
 
