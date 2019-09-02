@@ -7,6 +7,7 @@ const { Op } = require('sequelize');
 exports.getRanks = (req, res, next) => {
     User.findAll({
         attributes: { includ: ['alias', 'name', 'points', 'rank'], exclude: ['password'] },
+        where: { paid: true },
         order: [
             ['points', 'DESC']
         ]
@@ -84,6 +85,12 @@ exports.setPoints = (req, res, next) => {
                         teamId2: { [Op.col]: 'userSelection.teamId' }
                     }
                 }]
+            }
+        }, {
+            model: User,
+            attributes: ['paid'],
+            where: {
+                paid: true
             }
         }],
         order: [
