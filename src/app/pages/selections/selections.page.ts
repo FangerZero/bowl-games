@@ -43,12 +43,9 @@ export class SelectionsPage implements OnInit {
     const selectedGame = this.loadedSelections.find(select => gameId === select.gameId);
 
     if (this.loadedSelections.length) {
-      if (!!selectedGame) {
-        this.selectionsService.updateSelection(gameSelection);
-      } else {
-        this.selectionsService.createSelection(gameSelection);
-      }
+      this.selectionsService.updateSelection(gameSelection);
     } else {
+      this.loadedSelections.push({ id: 0, gameId, userId: 0, teamId: +e.detail.value });
       this.selectionsService.createSelection(gameSelection);
     }
   }
