@@ -27,6 +27,11 @@ const User = sequelize.define('user', {
     },
     rank: {
         type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+    },
+    points: {
+        type: Sequelize.DECIMAL,
         allowNull: false,
         defaultValue: 0,
     },

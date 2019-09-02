@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SwPush, SwUpdate } from '@angular/service-worker';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -25,12 +25,14 @@ export class AppComponent implements OnInit, OnDestroy {
     private statusBar: StatusBar,
     private router: Router,
     private authService: AuthService,
+    private menuCtrl: MenuController,
     private swUpdate: SwUpdate,
   ) {
     this.initializeApp();
   }
 
   ngOnInit() {
+    this.authService.autoLogin();
     this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
       this.loggedIn = isAuthenticated;
     });
@@ -50,6 +52,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
+    this.adminListenerSubs.unsubscribe();
+    this.onLogout();
   }
 
   initializeApp() {
@@ -57,6 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.loggedIn = !!this.authService.token;
+      this.isAdmin = !!this.authService.userIsAdmin;
     });
   }
 
@@ -65,5 +70,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isAdmin = false;
     this.authService.logout();
     this.router.navigateByUrl('/auth');
+  }
+
+  onMenuClose() {
+    this.menuCtrl.close();
   }
 }

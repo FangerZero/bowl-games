@@ -12,5 +12,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-</ion-content>
+<ion-content padding>
+    <ion-list *ngFor="let bowl of loadedBowls">
+      <ion-item (click)="onEditBowl(this.bowl.id)">
+        {{ bowl.name }}
+      </ion-item>
+    </ion-list>
+  </ion-content>

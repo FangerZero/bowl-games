@@ -7,11 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list *ngFor="let rank of loadedRanks; let i= index">
     <ion-item lines="none">
-      <span *ngIf="loadedRanks[i+1] && loadedRanks[i+1].points !== rank.points">{{ i+1 | rank }}</span>
-      <span *ngIf="!loadedRanks[i+1] || !rank.points">-</span>
+      {{ rank.rank | rank }}
       <div padding>
           {{ rank.name }}
       </div>

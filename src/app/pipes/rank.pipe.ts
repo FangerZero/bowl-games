@@ -19,6 +19,7 @@ export class RankPipe implements PipeTransform {
            case 1: return '1st';
            case 2: return '2nd';
            case 3: return '3rd';
+           case 0: return ' - ';
            default: return n;
        }
     }

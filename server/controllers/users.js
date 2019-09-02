@@ -51,6 +51,7 @@ exports.createUser = (req, res, next) => {
                 email: params.email,
                 password: hash,
                 verified: false,
+                points: 0,
                 paid: false,
                 admin: false,
             }).then(result => {
@@ -133,9 +134,7 @@ exports.postLogin =  (req, res, next) => {
             } else {
                 token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id}, secretKey, { expiresIn: '1h' });
             }
-            console.log('');
-            console.log('fetchedUser.admin', fetchedUser.admin);
-            console.log('');
+            
             res.status(200).json({ token, isAdmin: fetchedUser.admin });
         }).catch(err => {
             return res.status(401).json({

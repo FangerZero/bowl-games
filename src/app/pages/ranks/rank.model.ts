@@ -3,5 +3,6 @@ export class Rank {
         public userId: number,
         public name: string,
         public points: number,
+        public rank: number,
     ) {}
 }

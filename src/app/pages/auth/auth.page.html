@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <form #login="ngForm" (ngSubmit)="onSubmit(login)">
     <ion-grid>
         <ion-row>
@@ -26,6 +26,17 @@
               </ion-item>
               <ion-item *ngIf="!passwordCtrl.valid && passwordCtrl.touched" lines="none">
                 <ion-label color="danger">Should be at least 6 characters long.</ion-label>
+              </ion-item>
+              <ion-item *ngIf="!isLogin">
+                <ion-label position="floating">Name</ion-label>
+                <ion-input ngModel name="name" required minlength="1" #nameCtrl="ngModel"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!isLogin && !passwordCtrl.valid && passwordCtrl.touched" lines="none">
+                <ion-label color="danger">A name is required.</ion-label>
+              </ion-item>
+              <ion-item *ngIf="!isLogin">
+                <ion-label position="floating">Alias</ion-label>
+                <ion-input ngModel name="alias" #aliasCtrl="ngModel"></ion-input>
               </ion-item>
             </ion-list>
             <div text-center>

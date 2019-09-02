@@ -49,6 +49,8 @@ exports.createGame = (req, res, next) => {
         bowlId: params.bowlId,
         teamId1: params.teamId1,
         teamId2: params.teamId2,
+        teamScore1: params.teamScore1 || 0,
+        teamScore2: params.teamScore2 || 0,
         date: params.date,
         channel: params.channel,
         points: params.points,
@@ -67,9 +69,11 @@ exports.updateGame = (req, res, next) => {
         game.bowlId = req.body.bowlId || game.bowlId;
         game.teamId1 = req.body.teamId1 || game.teamId1;
         game.teamId2 = req.body.teamId2 || game.teamId2;
+        game.teamScore1 = `${req.body.teamScore1}` || game.teamScore1;
+        game.teamScore2 = `${req.body.teamScore2}` || game.teamScore2;
         game.date = req.body.date || game.date;
         game.channel = req.body.channel || game.channel;
-        game.points = req.body.points || game.points;
+        game.points = `${req.body.points}` || game.points;
         return game.save();
     }).then(result => res.send(result))
     .catch(err => console.log(err));

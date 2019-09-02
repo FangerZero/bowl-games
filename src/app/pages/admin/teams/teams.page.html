@@ -12,6 +12,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <ion-list *ngFor="let team of loadedTeams">
+    <ion-item (click)="onEditTeam(this.team.id)">
+      {{ team.name }}
+    </ion-item>
+  </ion-list>
 </ion-content>

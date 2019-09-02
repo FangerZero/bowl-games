@@ -3,10 +3,32 @@
       <ion-buttons slot="start">
         <ion-menu-button menu="main"></ion-menu-button>
       </ion-buttons>
-      <ion-title>Bowl Management: Bowl Name</ion-title>
+      <ion-title>Bowl Management</ion-title>
+      <ion-buttons slot="primary">
+        <ion-back-button defaultHref="/admin/bowls"></ion-back-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-</ion-content>
+<ion-content padding>
+    <form #editBowl="ngForm" (ngSubmit)="onSubmit(editBowl)" *ngIf="loadedBowl !== undefined">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-md="4" offset-md="4">
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">Bowl Name</ion-label>
+                <ion-input ngModel="{{ loadedBowl.name }}" name="bowlName" required #nameCtrl="ngModel"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched" lines="none">
+                <ion-label color="danger">Bowl Name is a required value.</ion-label>
+              </ion-item>
+            </ion-list>
+            <div text-center>
+              <ion-button type="submit" color="primary" expand="block" [disabled]="!editBowl.valid">Update Bowl</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>

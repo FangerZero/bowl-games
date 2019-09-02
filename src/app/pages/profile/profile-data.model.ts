@@ -5,6 +5,7 @@ export class Profile {
     email: string;
     password: string;
     rank: number;
+    points: number;
     verified: boolean;
     paid: boolean;
 }

@@ -5,9 +5,14 @@
         <ion-title>
           College Bowls
         </ion-title>
+        <ion-buttons slot="primary">
+          <ion-button (click)="onMenuClose()"> 
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content padding>
       <ion-list>
         <ion-menu-toggle menu="main">
           <!-- Info -->

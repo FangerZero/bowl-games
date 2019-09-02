@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 import { Profile } from '../profile/profile-data.model';
 import { ProfileService } from './profile.service';

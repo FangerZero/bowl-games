@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthData } from './auth-data.model';
+import { AuthSignupData } from './auth-signup-data.model';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +36,27 @@ export class AuthService {
     return this._adminStatusListener.asObservable();
   }
 
-  createUser(email: string, password: string) {
-    const authData: AuthData = { email, password };
+  createUser(email: string, password: string, name: string, alias: string) {
+    const authData: AuthSignupData = { email, password, name, alias };
     this.http.post(`${environment.api_url}/users/`, authData)
       .subscribe(response => {
-        console.log(response);
+        this.login(email, password);
       });
+  }
+
+  autoLogin() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+
+    if (userData.token) {
+      this._token = userData.token;
+      this._authStatusListener.next(true);
+
+      this._userIsAdmin = userData.admin || false;
+      this._adminStatusListener.next(userData.admin || false);
+    }
   }
 
   login(email: string, password: string) {
@@ -53,6 +69,15 @@ export class AuthService {
       const token = response.token;
       this._token = token;
       if (token) {
+        // Stay Logged in on Reload
+        let userData = {};
+        if (this._userIsAdmin) {
+          userData = { admin: true, token };
+        } else {
+          userData = { token };
+        }
+        localStorage.setItem('userData', JSON.stringify(userData))
+
         this._authStatusListener.next(true);
         this.loadingCtrl.create({ keyboardClose: true, message: 'Logging in...' })
         .then(loadingEl => {
@@ -67,5 +92,7 @@ export class AuthService {
   logout() {
     this._userIsAdmin = false;
     this._token = undefined;
+    // localStorage.clear();
+    localStorage.removeItem('userData');
   }
 }
