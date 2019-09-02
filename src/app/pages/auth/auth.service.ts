@@ -49,7 +49,6 @@ export class AuthService {
     if (!userData) {
       return;
     }
-    console.log('userData', userData);
 
     if (userData.token) {
       this._token = userData.token;
@@ -79,7 +78,7 @@ export class AuthService {
         }
         localStorage.setItem('userData', JSON.stringify(userData))
 
-        this._authStatusListener.next(true);;
+        this._authStatusListener.next(true);
         this.loadingCtrl.create({ keyboardClose: true, message: 'Logging in...' })
         .then(loadingEl => {
           loadingEl.present();
@@ -93,6 +92,7 @@ export class AuthService {
   logout() {
     this._userIsAdmin = false;
     this._token = undefined;
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem('userData');
   }
 }
