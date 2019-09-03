@@ -20,4 +20,7 @@ export class GameComponent implements OnInit {
     this.modalCtrl.dismiss(null, 'close', 'gameModal');
   }
 
+  getDisabled(date: Date) {
+    return date !== null && new Date(date) < new Date();
+  }
 }
