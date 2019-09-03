@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 import { BowlsService } from '../bowls.service';
 import { Bowl } from '../bowl.model';
@@ -14,7 +15,7 @@ export class EditPage implements OnInit {
   loadedBowl: Bowl;
   id: number;
 
-  constructor(private bowlsService: BowlsService, private route: ActivatedRoute) { }
+  constructor(private bowlsService: BowlsService, private route: ActivatedRoute, public alertController: AlertController) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -35,4 +36,24 @@ export class EditPage implements OnInit {
     this.bowlsService.updateBowl(this.id, name);
   }
 
+  async onDelete() {
+    const alert = await this.alertController.create({
+      header: 'Delete',
+      message: `Are you sure you want to delete <strong>${this.loadedBowl.name}</strong>?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'DELETE',
+          cssClass: 'danger',
+          handler: () => {
+            this.bowlsService.deleteBowl(this.id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

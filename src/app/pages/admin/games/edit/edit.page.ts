@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 import { BowlsService } from '../../bowls/bowls.service';
 import { Bowl } from '../../bowls/bowl.model';
@@ -26,7 +27,8 @@ export class EditPage implements OnInit {
     private gamesService: GamesService,
     private bowlsService: BowlsService,
     private teamsService: TeamsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -77,4 +79,24 @@ export class EditPage implements OnInit {
     this.gamesService.updateUserRank();
   }
 
+  async onDelete() {
+    const alert = await this.alertController.create({
+      header: 'Delete',
+      message: `Are you sure you want to delete this game?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'DELETE',
+          cssClass: 'danger',
+          handler: () => {
+            this.gamesService.deleteGame(this.id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

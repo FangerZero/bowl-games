@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { GameData } from './game-data.model';
@@ -13,7 +14,7 @@ export class GamesService {
     return this.http.get<Game[]>(`${environment.api_url}/games/`);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getGame(id: number) {
     return this.http.get<Game>(`${environment.api_url}/games/${id}`);
@@ -43,5 +44,10 @@ export class GamesService {
     this.http.get(`${environment.api_url}/users/ranks/set/points`).subscribe(
       response => { console.log('resposne:', response); }
     );
+  }
+
+  deleteGame(id: number) {
+    this.http.delete(`${environment.api_url}/games/${id}`).subscribe();
+    this.router.navigateByUrl(`admin/games`);
   }
 }
