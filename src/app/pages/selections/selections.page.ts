@@ -27,7 +27,7 @@ export class SelectionsPage implements OnInit {
   }
 
   getDisabled(date: Date) {
-    return new Date(date) < new Date();
+    return date !== null && new Date(date) < new Date();
   }
 
   getSelectedTeamId(gameId: number, teamId: number) {
