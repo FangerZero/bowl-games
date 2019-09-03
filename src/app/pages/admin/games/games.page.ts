@@ -24,25 +24,25 @@ export class GamesPage implements OnInit {
 
   ngOnInit() {
     this.gamesService.games.subscribe(games => {
-      this.loadedGames = games.sort((a,b) => {
-        if(a.date < b.date) { return -1; }
-        if(a.date > b.date) { return 1; }
+      this.loadedGames = games.sort((a, b) => {
+        if (a.date < b.date) { return -1; }
+        if (a.date > b.date) { return 1; }
         return 0;
       });
     });
 
     this.teamsService.teams.subscribe(teams => {
-      this.loadedTeams = teams.sort((a,b) => {
-        if(a.name < b.name) { return -1; }
-        if(a.name > b.name) { return 1; }
+      this.loadedTeams = teams.sort((a, b) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
         return 0;
       });
     });
 
     this.bowlsService.bowls.subscribe(bowls => {
-      this.loadedBowls = bowls.sort((a,b) => {
-        if(a.name < b.name) { return -1; }
-        if(a.name > b.name) { return 1; }
+      this.loadedBowls = bowls.sort((a, b) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
         return 0;
       });
     });
