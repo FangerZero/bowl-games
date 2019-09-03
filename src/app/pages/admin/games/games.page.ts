@@ -20,7 +20,12 @@ export class GamesPage implements OnInit {
   loadedTeams: Team[];
   loadedBowls: Bowl[];
 
-  constructor(private gamesService: GamesService, private teamsService: TeamsService, private bowlsService: BowlsService, private router: Router) { }
+  constructor(
+    private gamesService: GamesService,
+    private teamsService: TeamsService,
+    private bowlsService: BowlsService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.gamesService.games.subscribe(games => {
@@ -50,5 +55,17 @@ export class GamesPage implements OnInit {
 
   onEditGame(gameId: number) {
     this.router.navigateByUrl(`admin/games/edit/${gameId}`);
+  }
+
+  getBowlName(bowlId: number) {
+    if (this.loadedBowls) {
+      return this.loadedBowls.find(element => element.id === bowlId).name;
+    }
+  }
+
+  getTeamName(teamId: number) {
+    if (this.loadedTeams) {
+      return this.loadedTeams.find(element => element.id === teamId).name;
+    }
   }
 }

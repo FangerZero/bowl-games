@@ -15,7 +15,7 @@
 <ion-content padding>
     <ion-list *ngFor="let game of loadedGames">
       <ion-item (click)="onEditGame(this.game.id)">
-        {{ game.id }}
+        {{ getBowlName(game.bowlId) }}: {{ getTeamName(game.teamId1) }} vs {{ getTeamName(game.teamId2) }}
       </ion-item>
     </ion-list>
 </ion-content>
