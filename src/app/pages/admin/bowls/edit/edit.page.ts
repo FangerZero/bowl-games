@@ -46,7 +46,6 @@ export class EditPage implements OnInit {
           role: 'cancel',
         }, {
           text: 'DELETE',
-          cssClass: 'danger',
           handler: () => {
             this.bowlsService.deleteBowl(this.id);
           }

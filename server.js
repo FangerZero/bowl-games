@@ -21,6 +21,7 @@ const userSelectionsRoutes = require('./server/routes/userSelections');
 const ranksRoutes = require('./server/routes/ranks');
 const usersRoutes = require('./server/routes/users');
 const notificationsRoutes = require('./server/routes/notifications');
+const supportRoutes  = require('./server/routes/support');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/api/selections', userSelectionsRoutes);
 app.use('/api/users/ranks', ranksRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/notifications', notificationsRoutes);
+app.use('/api/support', supportRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
