@@ -21,6 +21,14 @@ const Team = sequelize.define('team', {
         type: Sequelize.STRING,
         allowNull: true,
     },
+    rank: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+    },
+    mascot: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
 });
 
 module.exports = Team;

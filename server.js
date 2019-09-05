@@ -10,12 +10,10 @@ const Game = require('./server/models/game');
 const Bowl = require('./server/models/bowl');
 const Team = require('./server/models/team');
 const UserSelection = require('./server/models/userSelection');
-const TeamRank = require('./server/models/teamRank');
 
 // Get our API routes
 const bowlsRoutes = require('./server/routes/bowls');
 const gamesRoutes = require('./server/routes/games');
-// const teamRanksRoutes = require('./server/routes/teamRanks');
 const teamsRoutes = require('./server/routes/teams');
 const userSelectionsRoutes = require('./server/routes/userSelections');
 const ranksRoutes = require('./server/routes/ranks');
@@ -43,7 +41,6 @@ app.use(express.static(path.join(__dirname, 'src')));
 // Set our api routes
 app.use('/api/bowls', bowlsRoutes);
 app.use('/api/games', gamesRoutes);
-// app.use('/api/teams/ranks', teamRanksRoutes);
 app.use('/api/teams', teamsRoutes);
 app.use('/api/selections', userSelectionsRoutes);
 app.use('/api/users/ranks', ranksRoutes);
@@ -72,9 +69,6 @@ UserSelection.belongsTo(User);
 User.hasMany(UserSelection);
 UserSelection.belongsTo(Team);
 Team.hasMany(UserSelection);
-// Team Ranks
-TeamRank.belongsTo(Team);
-Team.hasMany(TeamRank);
 // Games
 Game.belongsTo(Bowl);
 Bowl.hasMany(Game);
