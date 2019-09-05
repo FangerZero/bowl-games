@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Selection } from './selection-data.model';
 import { SelectionsService } from './selections.service';
 import { Bowl } from '../games/bowl.model';
+import { Profile } from '../profile/profile-data.model';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
   selector: 'app-selections',
@@ -12,9 +14,11 @@ import { Bowl } from '../games/bowl.model';
 export class SelectionsPage implements OnInit {
   loadedSelections: Selection[];
   loadedGames: Bowl[];
+  loadedProfile: Profile;
 
   constructor(
-    private selectionsService: SelectionsService
+    private selectionsService: SelectionsService,
+    private profileService: ProfileService
   ) { }
 
   ngOnInit() {
@@ -23,6 +27,9 @@ export class SelectionsPage implements OnInit {
     });
     this.selectionsService.games.subscribe(games => {
       this.loadedGames = games;
+    });
+    this.profileService.profile.subscribe(profile => {
+      this.loadedProfile = profile;
     });
   }
 
@@ -48,6 +55,11 @@ export class SelectionsPage implements OnInit {
       this.loadedSelections.push({ id: 0, gameId, userId: 0, teamId: +e.detail.value });
       this.selectionsService.createSelection(gameSelection);
     }
+  }
+
+  onPay() {
+    // Place Holder
+    this.profileService.updateProfile({ paid: true });
   }
 
 }

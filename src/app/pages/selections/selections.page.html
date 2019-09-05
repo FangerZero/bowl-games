@@ -28,4 +28,6 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>
+  <ion-button *ngIf="!loadedProfile || !loadedProfile.paid" expand="block" (click)="onPay()">Submit</ion-button>
+  <div *ngIf="!loadedProfile || !loadedProfile.paid" class="ion-center">By submitting a payment, you understand it's your responsibiilty to ensure your selections are completed before each game.</div>
 </ion-content>

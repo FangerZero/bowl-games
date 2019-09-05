@@ -12,6 +12,7 @@ import { ProfileService } from './profile.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  // Subscription Key
   readonly VAPID_PUBLIC_KEY = 'BIRnP5XEz-c7EjzVRhXv_VijdP9c-04X7cP-DQfeoZi3XrCKBrS1j17EqGfbhRvmNDI8oCXBWMaNT5-_arSjnvo';
   loadedProfile: Profile;
   disablePass = true;
