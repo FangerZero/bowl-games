@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <form #newBowl="ngForm" (ngSubmit)="onSubmit(newBowl)">
     <ion-grid>
       <ion-row>
@@ -24,7 +24,7 @@
               <ion-label color="danger">Bowl Name is a required value.</ion-label>
             </ion-item>
           </ion-list>
-          <div text-center>
+          <div class="ion-text-center">
             <ion-button type="submit" color="primary" expand="block" [disabled]="!newBowl.valid">Add Bowl</ion-button>
           </div>
         </ion-col>

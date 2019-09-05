@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <form #editGame="ngForm" (ngSubmit)="onSubmit(editGame)" *ngIf="loadedGame !== undefined">
     <ion-grid>
       <ion-row>
@@ -59,7 +59,7 @@
               <ion-datetime ngModel="{{ loadedGame.date }}" name="gameTime" displayFormat="HH:mm" minuteValues="0,15,30,45"></ion-datetime>
             </ion-item>
           </ion-list>
-          <div text-center>
+          <div class="ion-text-center">
             <ion-button type="submit" color="primary" expand="block" [disabled]="!editGame.valid">Update Game</ion-button>
             <ion-button color="danger" expand="block" (click)="onDelete()">Delete Game</ion-button>
           </div>

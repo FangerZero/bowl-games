@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
     <ion-list *ngFor="let game of loadedGames">
       <ion-item (click)="onEditGame(this.game.id)">
         {{ getBowlName(game.bowlId) }}: {{ getTeamName(game.teamId1) }} vs {{ getTeamName(game.teamId2) }}

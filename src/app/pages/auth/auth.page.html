@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <form #login="ngForm" (ngSubmit)="onSubmit(login)">
     <ion-grid>
         <ion-row>
@@ -39,7 +39,7 @@
                 <ion-input ngModel name="alias" #aliasCtrl="ngModel"></ion-input>
               </ion-item>
             </ion-list>
-            <div text-center>
+            <div class="ion-text-center">
               <ion-button type="submit" color="primary" expand="block" [disabled]="!login.valid">{{ isLogin ? 'Login' : 'Sign-up'}}</ion-button>
               <ion-item *ngIf="!isAuthenticated" lines="none">
                   <ion-label color="danger">Invalid Credentials</ion-label>

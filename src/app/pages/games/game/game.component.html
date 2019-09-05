@@ -9,14 +9,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-list>
     <ion-item lines="none">
-      <ion-label>{{ game.team1.name }}</ion-label>
+      <ion-label>{{ game.team1.name }}({{ game.team1.rank }})</ion-label>
       <span *ngIf="getDisabled(game.date)">{{ game.teamScore1 }}</span>
     </ion-item>
     <ion-item>
-      <ion-label>{{ game.team2.name }}</ion-label>
+      <ion-label>{{ game.team2.name }}({{ game.team2.rank }})</ion-label>
       <span *ngIf="getDisabled(game.date)">{{ game.teamScore2 }}</span>
     </ion-item>
     <ion-item lines="none">
