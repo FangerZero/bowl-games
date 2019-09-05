@@ -16,12 +16,14 @@
       </ion-list-header>
 
       <ion-item lines="none">
-        <ion-label>{{ game.team1.name }}({{ game.team1.rank }}) - {{ game.teamScore1 || 0 }}</ion-label>
+        <ion-label *ngIf="getDisabled(game.date)">{{ game.team1.name }}({{ game.team1.rank }}) - {{ game.teamScore1 || 0 }}</ion-label>
+        <ion-label *ngIf="!getDisabled(game.date)">{{ game.team1.name }}({{ game.team1.rank }})</ion-label>
         <ion-radio slot="start" value="{{game.team1.id}}" [checked]="getSelectedTeamId(game.id, game.team1.id)" [disabled]="getDisabled(game.date)"></ion-radio>
       </ion-item>
 
       <ion-item lines="none">
-          <ion-label>{{ game.team2.name }}({{ game.team2.rank }}) - {{ game.teamScore1 || 0 }}</ion-label>
+        <ion-label *ngIf="getDisabled(game.date)">{{ game.team2.name }}({{ game.team2.rank }}) - {{ game.teamScore2 || 0 }}</ion-label>
+        <ion-label *ngIf="!getDisabled(game.date)">{{ game.team2.name }}({{ game.team2.rank }})</ion-label>
         <ion-radio slot="start" value="{{game.team2.id}}" [checked]="getSelectedTeamId(game.id, game.team2.id)" [disabled]="getDisabled(game.date)"></ion-radio>
       </ion-item>
     </ion-radio-group>
