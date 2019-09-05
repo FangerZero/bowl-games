@@ -40,6 +40,7 @@
               </ion-item>
             </ion-list>
             <div class="ion-text-center">
+              <ion-button *ngIf="isLogin" type="button" color="primary" fill="clear" expand="block" (click)="onGetPassword()">Recover Password</ion-button>
               <ion-button type="submit" color="primary" expand="block" [disabled]="!login.valid">{{ isLogin ? 'Login' : 'Sign-up'}}</ion-button>
               <ion-item *ngIf="!isAuthenticated" lines="none">
                   <ion-label color="danger">Invalid Credentials</ion-label>

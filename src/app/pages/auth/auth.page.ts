@@ -28,6 +28,10 @@ export class AuthPage implements OnInit, OnDestroy {
     this.authListenerSubs.unsubscribe();
   }
 
+  onGetPassword() {
+    console.log('Need to generate new password');
+  }
+
   onSwitchAuthMode() {
     this.isAuthenticated = true;
     this.isLogin = !this.isLogin;
