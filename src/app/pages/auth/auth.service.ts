@@ -45,6 +45,15 @@ export class AuthService {
       });
   }
 
+  recoverPassword() {
+    console.log('Need to recover Password');
+   /* this.http.get(`${environment.api_url}/users/recover`)
+    .subscribe(response => {
+      console.log('FML');
+    });
+    */
+  }
+
   autoLogin() {
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {

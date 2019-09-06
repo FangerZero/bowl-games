@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const salt = 13;
 const secretKey = '720Qu9|&r)/(uCOq!m:P)z*9bDS,2)_qYbLTY7EkAQQk_7ipRWZ2UZIZ1fu_fMya5azU2xd4VTD_aN8JeLum43LfxGUZ2Ye_73ed4M4nA71$h_7E3DH!M70r4d4Y_t34(H4m4NT0715h_73EDH1mF0R41!7ET1m3_0UYiML6xfHuuQ_gMAjwz56ubcBYg_vqt3sZfrVsPeqce_p39AtSBlDzXMPiMywdI_C~aKo-|N8jBfsIC..}g^Qo1f.=eR<V';
+const generator = require('generate-password');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 /**************
  * Get All Users
@@ -42,24 +45,39 @@ exports.getProfile = (req, res, next) => {
  * Create New User
  */
 exports.createUser = (req, res, next) => {
-    const params = req.body;
-    bcrypt.hash(params.password, salt)
-        .then(hash => {
-            User.create({
-                name: params.name || '',
-                alias: params.alias || '',
-                email: params.email,
-                password: hash,
-                verified: false,
-                points: 0,
-                paid: false,
-                admin: false,
-            }).then(result => {
-                res.status(201).json({
-                    message: 'User Successfully Created.'
-                });
-            }).catch(err => console.log('User CreateUser: ', err));
-        }).catch(err => console.log('BCrypt Error', err));
+    const params = req.body;    
+
+    User.findOne({
+        attributes: ['email'],
+        where: {
+            email: params.email
+          }
+      })
+    .then(user => {
+        if(user.length) {
+            bcrypt.hash(params.password, salt)
+            .then(hash => {
+                User.create({
+                    name: params.name || '',
+                    alias: params.alias || '',
+                    email: params.email,
+                    password: hash,
+                    verified: false,
+                    points: 0,
+                    paid: false,
+                    admin: false,
+                }).then(result => {
+                    res.status(201).json({
+                        message: 'User Successfully Created.'
+                    });
+                }).catch(err => console.log('User CreateUser: ', err));
+            }).catch(err => console.log('BCrypt Error', err));
+        } else {
+            res.status(409).json({
+                message: 'There was an issue.'
+            });
+        }
+    }).catch(err => console.log(err));
 };
 
 /**************
@@ -93,6 +111,62 @@ exports.updateUser = (req, res, next) => {
         .catch(err => console.log(err));
     }
 };
+
+exports.getPassword = (req, res, next) => {
+    const password = generator.generate({
+        length: 10,
+        numbers: true
+    });
+
+    bcrypt.hash(password, salt)
+    .then(hash => {
+        User.findOne({
+            attributes: ['email', 'password'],
+            where: {
+                email: 'Test@123'
+              }
+          })
+        .then(user => {
+            if(user.length) {
+                user.password = hash;
+
+                const output = `
+                <h3>New Password Request</h3>
+                <p>
+                Here is your new password you requested ${password}
+                </p>`;
+            
+                let transporter = nodemailer.createTransport({
+                    host: process.env.MAIL_HOST,
+                    port: process.env.MAIL_PORT,
+                    secure: false,
+                    auth: {
+                        user: process.env.EMAIL,
+                        pass: process.env.PASSWORD
+                    }
+                });
+            
+                // user.dataValues.email
+                let mailOptions = {
+                    from: `"Bowl Games Support" ${process.env.EMAIL}`,
+                    to: 'fangerzero@gmail.com',
+                    subject: `Bowl Games Password Recovery`,
+                    text: 'This email is from the support form',
+                    html: output
+                };
+            
+                transporter.sendMail(mailOptions)
+                .then(response => {
+                    console.log('trans', response);
+                    res.send('Email has been sent');
+                }).catch(err => console.log('error', err));
+
+                return user.save();
+            }
+        }).catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+}
 
 /**************
  * Delete User by ID
