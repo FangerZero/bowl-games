@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 import { TeamsService } from '../teams.service';
 import { Team } from '../team.model';
@@ -14,7 +15,7 @@ export class EditPage implements OnInit {
   loadedTeam: Team;
   id: number;
 
-  constructor(private teamsService: TeamsService, private route: ActivatedRoute) { }
+  constructor(private teamsService: TeamsService, private route: ActivatedRoute, public alertController: AlertController) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -37,6 +38,27 @@ export class EditPage implements OnInit {
     const state = form.value.teamState;
     const rank = form.value.teamRank;
     this.teamsService.updateTeam(this.id, name, mascot, city, state, rank);
+  }
+
+  async onDelete() {
+    const alert = await this.alertController.create({
+      header: 'Delete',
+      message: `Are you sure you want to delete <strong>${this.loadedTeam.name}</strong>?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'DELETE',
+          cssClass: 'danger',
+          handler: () => {
+            this.teamsService.deleteTeam(this.id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

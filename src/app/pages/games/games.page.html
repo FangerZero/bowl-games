@@ -7,10 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-list *ngFor="let game of loadedGames">
     <ion-item (click)="onOpenGame(this.game.bowlId)">
-      {{ game.bowl.name }}
+      {{ game.bowl.name }}: {{ game.team1.name }} vs {{ game.team2.name }}
     </ion-item>
   </ion-list>
 </ion-content>

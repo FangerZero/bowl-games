@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { BowlData } from './bowl-data.model';
@@ -13,7 +14,7 @@ export class BowlsService {
     return this.http.get<Bowl[]>(`${environment.api_url}/bowls/`);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getBowl(id: number) {
     return this.http.get<Bowl>(`${environment.api_url}/bowls/${id}`);
@@ -30,5 +31,10 @@ export class BowlsService {
   updateBowl(id: number, name: string) {
     const bowlData: BowlData = {name};
     this.http.patch(`${environment.api_url}/bowls/${id}`, bowlData).subscribe();
+  }
+
+  deleteBowl(id: number) {
+    this.http.delete(`${environment.api_url}/bowls/${id}`).subscribe();
+    this.router.navigateByUrl(`admin/bowls`);
   }
 }

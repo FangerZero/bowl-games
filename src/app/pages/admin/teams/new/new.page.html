@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <form #newTeam="ngForm" (ngSubmit)="onSubmit(newTeam)">
     <ion-grid>
       <ion-row>
@@ -46,7 +46,7 @@
               <ion-input ngModel name="teamRank" type="number" min="1" max="100" #rankCtrl="ngModel"></ion-input>
             </ion-item>
           </ion-list>
-          <div text-center>
+          <div class="ion-text-center">
             <ion-button type="submit" color="primary" expand="block" [disabled]="!newTeam.valid">Add Team</ion-button>
           </div>
         </ion-col>

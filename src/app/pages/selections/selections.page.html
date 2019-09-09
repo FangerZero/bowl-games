@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-list *ngFor="let game of loadedGames">
     <ion-radio-group (ionSelect)="onSelectTeam($event, game.id)">
       <ion-list-header>
@@ -16,14 +16,18 @@
       </ion-list-header>
 
       <ion-item lines="none">
-        <ion-label>{{ game.team1.name }} - {{ game.teamScore1 || 0 }}</ion-label>
+        <ion-label *ngIf="getDisabled(game.date)">{{ game.team1.name }}({{ game.team1.rank }}) - {{ game.teamScore1 || 0 }}</ion-label>
+        <ion-label *ngIf="!getDisabled(game.date)">{{ game.team1.name }}({{ game.team1.rank }})</ion-label>
         <ion-radio slot="start" value="{{game.team1.id}}" [checked]="getSelectedTeamId(game.id, game.team1.id)" [disabled]="getDisabled(game.date)"></ion-radio>
       </ion-item>
 
       <ion-item lines="none">
-          <ion-label>{{ game.team2.name }} - {{ game.teamScore1 || 0 }}</ion-label>
+        <ion-label *ngIf="getDisabled(game.date)">{{ game.team2.name }}({{ game.team2.rank }}) - {{ game.teamScore2 || 0 }}</ion-label>
+        <ion-label *ngIf="!getDisabled(game.date)">{{ game.team2.name }}({{ game.team2.rank }})</ion-label>
         <ion-radio slot="start" value="{{game.team2.id}}" [checked]="getSelectedTeamId(game.id, game.team2.id)" [disabled]="getDisabled(game.date)"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
+  <ion-button *ngIf="!loadedProfile || !loadedProfile.paid" expand="block" (click)="onPay()">Submit</ion-button>
+  <div *ngIf="!loadedProfile || !loadedProfile.paid" class="ion-center">By submitting a payment, you understand it's your responsibiilty to ensure your selections are completed before each game.</div>
 </ion-content>

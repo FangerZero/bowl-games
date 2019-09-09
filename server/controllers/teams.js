@@ -28,6 +28,8 @@ exports.createTeam = (req, res, next) => {
         name: params.name,
         city: params.city,
         state: params.state,
+        rank: params.rank,
+        mascot: params.mascot,
     })
     .then(result => {
         res.send(result);
@@ -43,6 +45,8 @@ exports.updateTeam = (req, res, next) => {
         team.name = req.body.name || team.name;
         team.city = req.body.city || team.city;
         team.state = req.body.state || team.state;
+        team.rank = req.body.rank || team.rank;
+        team.mascot = req.body.mascot || team.mascot;
         return team.save();
     }).then(result => res.send(result))
     .catch(err => console.log(err));

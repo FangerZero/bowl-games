@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ team.name }}</ion-title>
+    <ion-title>{{ team.name }}({{ team.rank }})</ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="onClose()">
         <ion-icon name="close"></ion-icon>
@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   {{ team.city}}, {{ team.state }}
 </ion-content>
   

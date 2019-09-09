@@ -18,7 +18,11 @@ export class GamesPage implements OnInit {
 
   ngOnInit() {
     this.gamesService.games.subscribe(games => {
-      this.loadedGames = games;
+      this.loadedGames = games.sort((a, b) => {
+        if (a.bowl.name < b.bowl.name) { return -1; }
+        if (a.bowl.name > b.bowl.name) { return 1; }
+        return 0;
+      });
     });
   }
 

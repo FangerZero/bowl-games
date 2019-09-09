@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ game.bowl.name }}</ion-title>
+    <ion-title>{{ game.bowl.name }} ({{ game.points }} pts)</ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="onClose()">
         <ion-icon name="close"></ion-icon>
@@ -9,19 +9,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  {{ game.team1.name }}
-  <br />
-  vs
-  <br />
-  {{ game.team2.name }}
-  <br />
-  Date: {{ game.date | date }}
-  <br />
-  Time: {{ game.date | date: 'shortTime' }}
-  <br />
-  Channel: {{ game.channel }}
-  <br />
-  Points: {{ game.points }}
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label>{{ game.team1.name }}({{ game.team1.rank }})</ion-label>
+      <span *ngIf="getDisabled(game.date)">{{ game.teamScore1 }}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ game.team2.name }}({{ game.team2.rank }})</ion-label>
+      <span *ngIf="getDisabled(game.date)">{{ game.teamScore2 }}</span>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Date</ion-label>
+      {{ game.date | date }}
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Time</ion-label>
+      {{ game.date | date: 'shortTime' }}
+    </ion-item>
+    <ion-item>
+      <ion-label>Channel</ion-label>
+      {{ game.channel }}
+    </ion-item>
+  </ion-list>
 </ion-content>
   

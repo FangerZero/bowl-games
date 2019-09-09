@@ -50,7 +50,7 @@ export class NewPage implements OnInit {
     const team2Id = form.value.gameTeam2;
     const teamScore1 = form.value.gameScore1;
     const teamScore2 = form.value.gameScore2;
-    const date = new Date(form.value.gameDate + ' ' + form.value.gameTime);
+    const date = new Date(form.value.gameDate.split('T')[0] + 'T' + form.value.gameTime.split('T')[1]);
     const channel = form.value.gameChannel;
     const points = form.value.gamePoints;
 

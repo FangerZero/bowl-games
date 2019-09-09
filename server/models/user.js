@@ -20,6 +20,7 @@ const User = sequelize.define('user', {
     email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
     },
     password: {
         type: Sequelize.STRING,
@@ -44,6 +45,10 @@ const User = sequelize.define('user', {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
+    },
+    sub: {
+        type: Sequelize.JSON,
+        allowNull: true,
     },
     admin: {
         type: Sequelize.BOOLEAN,

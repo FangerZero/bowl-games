@@ -28,6 +28,12 @@ export class AuthPage implements OnInit, OnDestroy {
     this.authListenerSubs.unsubscribe();
   }
 
+  onGetPassword(form: NgForm) {
+    console.log(form);
+    this.authService.recoverPassword();
+    console.log('Need to generate new password');
+  }
+
   onSwitchAuthMode() {
     this.isAuthenticated = true;
     this.isLogin = !this.isLogin;
@@ -52,6 +58,7 @@ export class AuthPage implements OnInit, OnDestroy {
       // Send Request to Sign up
       // On create user, logs you in and take you to the selections page
       this.authService.createUser(email, password, name, alias);
+      form.reset();
     }
   }
 

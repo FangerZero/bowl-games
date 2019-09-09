@@ -17,6 +17,7 @@ export class AuthService {
   // Push Token to Interested Components
   private _authStatusListener = new Subject<boolean>();
   private _adminStatusListener = new Subject<boolean>();
+  private loginTimer: any;
 
   get userIsAdmin() {
     return this._userIsAdmin;
@@ -44,6 +45,15 @@ export class AuthService {
       });
   }
 
+  recoverPassword() {
+    console.log('Need to recover Password');
+   /* this.http.get(`${environment.api_url}/users/recover`)
+    .subscribe(response => {
+      console.log('FML');
+    });
+    */
+  }
+
   autoLogin() {
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
@@ -53,6 +63,7 @@ export class AuthService {
     if (userData.token) {
       this._token = userData.token;
       this._authStatusListener.next(true);
+      this.autoLogout();
 
       this._userIsAdmin = userData.admin || false;
       this._adminStatusListener.next(userData.admin || false);
@@ -76,7 +87,8 @@ export class AuthService {
         } else {
           userData = { token };
         }
-        localStorage.setItem('userData', JSON.stringify(userData))
+        localStorage.setItem('userData', JSON.stringify(userData));
+        this.autoLogout();
 
         this._authStatusListener.next(true);
         this.loadingCtrl.create({ keyboardClose: true, message: 'Logging in...' })
@@ -89,10 +101,20 @@ export class AuthService {
     });
   }
 
+  autoLogout() {
+    this.loginTimer = setTimeout(() => {
+      this.logout();
+    }, 60 * 60 * 1000);
+  }
+
   logout() {
     this._userIsAdmin = false;
     this._token = undefined;
     // localStorage.clear();
     localStorage.removeItem('userData');
+    if (this.loginTimer) {
+      clearTimeout(this.loginTimer);
+    }
+    this.loginTimer = null;
   }
 }

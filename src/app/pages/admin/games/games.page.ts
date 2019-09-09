@@ -20,29 +20,34 @@ export class GamesPage implements OnInit {
   loadedTeams: Team[];
   loadedBowls: Bowl[];
 
-  constructor(private gamesService: GamesService, private teamsService: TeamsService, private bowlsService: BowlsService, private router: Router) { }
+  constructor(
+    private gamesService: GamesService,
+    private teamsService: TeamsService,
+    private bowlsService: BowlsService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.gamesService.games.subscribe(games => {
-      this.loadedGames = games.sort((a,b) => {
-        if(a.date < b.date) { return -1; }
-        if(a.date > b.date) { return 1; }
+      this.loadedGames = games.sort((a, b) => {
+        if (a.date < b.date) { return -1; }
+        if (a.date > b.date) { return 1; }
         return 0;
       });
     });
 
     this.teamsService.teams.subscribe(teams => {
-      this.loadedTeams = teams.sort((a,b) => {
-        if(a.name < b.name) { return -1; }
-        if(a.name > b.name) { return 1; }
+      this.loadedTeams = teams.sort((a, b) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
         return 0;
       });
     });
 
     this.bowlsService.bowls.subscribe(bowls => {
-      this.loadedBowls = bowls.sort((a,b) => {
-        if(a.name < b.name) { return -1; }
-        if(a.name > b.name) { return 1; }
+      this.loadedBowls = bowls.sort((a, b) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
         return 0;
       });
     });
@@ -50,5 +55,17 @@ export class GamesPage implements OnInit {
 
   onEditGame(gameId: number) {
     this.router.navigateByUrl(`admin/games/edit/${gameId}`);
+  }
+
+  getBowlName(bowlId: number) {
+    if (this.loadedBowls) {
+      return this.loadedBowls.find(element => element.id === bowlId).name;
+    }
+  }
+
+  getTeamName(teamId: number) {
+    if (this.loadedTeams) {
+      return this.loadedTeams.find(element => element.id === teamId).name;
+    }
   }
 }

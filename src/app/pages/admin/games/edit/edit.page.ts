@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 import { BowlsService } from '../../bowls/bowls.service';
 import { Bowl } from '../../bowls/bowl.model';
@@ -26,7 +27,8 @@ export class EditPage implements OnInit {
     private gamesService: GamesService,
     private bowlsService: BowlsService,
     private teamsService: TeamsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -67,7 +69,7 @@ export class EditPage implements OnInit {
     const team2Id = form.value.gameTeam2;
     const teamScore1 = form.value.gameScore1;
     const teamScore2 = form.value.gameScore2;
-    const date = new Date(form.value.gameTime);
+    const date = new Date(form.value.gameDate.split('T')[0] + 'T' + form.value.gameTime.split('T')[1]);
     const channel = form.value.gameChannel;
     const points = form.value.gamePoints;
 
@@ -77,4 +79,24 @@ export class EditPage implements OnInit {
     this.gamesService.updateUserRank();
   }
 
+  async onDelete() {
+    const alert = await this.alertController.create({
+      header: 'Delete',
+      message: `Are you sure you want to delete this game?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'DELETE',
+          cssClass: 'danger',
+          handler: () => {
+            this.gamesService.deleteGame(this.id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { TeamData } from './team-data.model';
@@ -14,7 +15,7 @@ export class TeamsService {
     return this.http.get<Team[]>(`${environment.api_url}/teams/`);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getTeam(id: number) {
     return this.http.get<Team>(`${environment.api_url}/teams/${id}`);
@@ -28,5 +29,10 @@ export class TeamsService {
   updateTeam(id: number, name: string, mascot: string, city: string, state: string, rank: number) {
     const teamData: TeamData = {name, mascot, city, state, rank};
     this.http.patch(`${environment.api_url}/teams/${id}`, teamData).subscribe();
+  }
+
+  deleteTeam(id: number) {
+    this.http.delete(`${environment.api_url}/teams/${id}`).subscribe();
+    this.router.navigateByUrl(`admin/teams`);
   }
 }
