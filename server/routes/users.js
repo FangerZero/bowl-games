@@ -10,6 +10,7 @@ router.get('/profile', checkAuth, usersController.getProfile);
 router.get('/:id', checkAuth, usersController.getUser);
 router.get('/', checkAuth, usersController.getUsers);
 
+router.patch('/sub', checkAuth, usersController.updateSub);
 router.patch('/:id', checkAuth, usersController.updateUser);
 router.patch('/', checkAuth, usersController.updateUser);
 

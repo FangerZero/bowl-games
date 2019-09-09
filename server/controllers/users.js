@@ -54,7 +54,7 @@ exports.createUser = (req, res, next) => {
           }
       })
     .then(user => {
-        if(user.length) {
+        if(!user) {
             bcrypt.hash(params.password, salt)
             .then(hash => {
                 User.create({
@@ -111,7 +111,23 @@ exports.updateUser = (req, res, next) => {
         .catch(err => console.log(err));
     }
 };
+/**************
+ * Update User Sub by ID
+ */
+exports.updateSub = (req, res, next) => {
+    User.findByPk(req.userData.userId, {
+        attributes: { exclude: ['password'] }
+      })
+    .then(user => {
+        user.sub = req.body.sub || user.sub;
+        return user.save();
+    }).then(result => res.send(result))
+    .catch(err => console.log(err));
+};
 
+/**************
+ * Generate New Password
+ */
 exports.getPassword = (req, res, next) => {
     const password = generator.generate({
         length: 10,

@@ -46,6 +46,10 @@ const User = sequelize.define('user', {
         allowNull: false,
         defaultValue: false,
     },
+    sub: {
+        type: Sequelize.JSON,
+        allowNull: true,
+    },
     admin: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
