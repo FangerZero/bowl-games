@@ -17,7 +17,11 @@ export class ProfilePage implements OnInit {
   loadedProfile: Profile;
   disablePass = true;
 
-  constructor(private profileService: ProfileService, private http: HttpClient, private swPush: SwPush) { }
+  constructor(
+    private profileService: ProfileService,
+    private http: HttpClient,
+    private swPush: SwPush
+  ) { }
 
   ngOnInit() {
     this.profileService.profile.subscribe(profile => {
@@ -53,13 +57,12 @@ export class ProfilePage implements OnInit {
 
   onSubscribe() {
     alert('Functionality disabled');
-    /*
+
     this.swPush.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY
     })
-    .then(sub => this.sendToServer(sub))
+    .then(sub => this.profileService.addPushSubscriber(sub).subscribe())
     .catch(err => console.error('Could not subscribe to notifications', err));
-    */
   }
 
   sendToServer(params: any) {

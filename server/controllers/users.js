@@ -119,7 +119,7 @@ exports.updateSub = (req, res, next) => {
         attributes: { exclude: ['password'] }
       })
     .then(user => {
-        user.sub = req.body.sub || user.sub;
+        user.sub = req.body || user.sub;
         return user.save();
     }).then(result => res.send(result))
     .catch(err => console.log(err));

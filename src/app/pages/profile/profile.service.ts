@@ -16,4 +16,8 @@ export class ProfileService {
   updateProfile(data: object) {
     this.http.patch(`${environment.api_url}/users/`, data).subscribe();
   }
+
+  addPushSubscriber(data: any) {
+    return this.http.patch(`${environment.api_url}/users/sub`, data);
+  }
 }

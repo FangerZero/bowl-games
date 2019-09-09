@@ -77,6 +77,7 @@ export class EditPage implements OnInit {
 
     this.gamesService.updateUserPoints();
     this.gamesService.updateUserRank();
+    this.gamesService.sendNotifRank();
   }
 
   async onDelete() {
