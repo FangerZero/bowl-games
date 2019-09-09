@@ -40,6 +40,12 @@ export class GamesService {
     );
   }
 
+  sendNotifRank() {
+    this.http.post(`${environment.api_url}/notifications/ranks`, null).subscribe(
+      response => { console.log('resposne:', response); }
+    );
+  }
+
   updateUserPoints() {
     this.http.get(`${environment.api_url}/users/ranks/set/points`).subscribe(
       response => { console.log('resposne:', response); }
