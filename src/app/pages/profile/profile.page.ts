@@ -55,14 +55,18 @@ export class ProfilePage implements OnInit {
    * Notifications
    */
 
-  onSubscribe() {
-    alert('Functionality disabled');
-
-    this.swPush.requestSubscription({
-      serverPublicKey: this.VAPID_PUBLIC_KEY
-    })
-    .then(sub => this.profileService.addPushSubscriber(sub).subscribe())
-    .catch(err => console.error('Could not subscribe to notifications', err));
+  onSubscribe(subType: boolean) {
+    if (subType) {
+      this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY
+      })
+      .then(sub => this.profileService.addPushSubscriber(sub).subscribe())
+      .catch(err => console.error('Could not subscribe to notifications', err));
+    } else {
+      this.swPush.unsubscribe()
+      .then(sub => this.profileService.removePushSubscriber().subscribe())
+      .catch(err => console.error('Could not unsubscribe from notifications', err));
+    }
   }
 
   sendToServer(params: any) {

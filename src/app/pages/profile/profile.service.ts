@@ -20,4 +20,8 @@ export class ProfileService {
   addPushSubscriber(data: any) {
     return this.http.patch(`${environment.api_url}/users/sub`, data);
   }
+
+  removePushSubscriber() {
+    return this.http.patch(`${environment.api_url}/users/sub/remove`, null);
+  }
 }

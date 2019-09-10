@@ -124,6 +124,17 @@ exports.updateSub = (req, res, next) => {
     }).then(result => res.send(result))
     .catch(err => console.log(err));
 };
+exports.removeSub = (req, res, next) => {
+    User.findByPk(req.userData.userId, {
+        attributes: { exclude: ['password'] }
+      })
+    .then(user => {
+        user.sub = null;
+        return user.save();
+    }).then(result => res.send(result))
+    .catch(err => console.log(err));
+};
+
 
 /**************
  * Generate New Password
