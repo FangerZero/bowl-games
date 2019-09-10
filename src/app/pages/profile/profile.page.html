@@ -35,10 +35,13 @@
               <ion-input [disabled]="disablePass" type="password" name="password" required minlength="6" (change)="updatePassword($event.target.value)" value="{{ loadedProfile.password }}"></ion-input>
               <ion-button *ngIf="disablePass" slot="end" (click)="editPassword()">Edit</ion-button>
             </ion-item>
+            <ion-button *ngIf="this.loadedProfile.sub === null" color="primary" expand="block" (click)="onSubscribe(true)">
+              Subscribe to Notifications
+            </ion-button>
+            <ion-button *ngIf="this.loadedProfile.sub !== null" color="primary" expand="block" (click)="onSubscribe(false)">
+              Unsubscribe from Notifications
+            </ion-button>
           </ion-list>
-          <ion-button color="primary" expand="block" (click)="onSubscribe()">
-            Subscribe to Notifications
-          </ion-button>
         </ion-col>
     </ion-row>
   </ion-grid>

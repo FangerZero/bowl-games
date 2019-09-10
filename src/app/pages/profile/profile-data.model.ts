@@ -8,4 +8,5 @@ export class Profile {
     points: number;
     verified: boolean;
     paid: boolean;
+    sub: JSON;
 }
