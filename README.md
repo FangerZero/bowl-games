@@ -32,7 +32,7 @@ Attempting to build an application to help solidfy what I have learned and test 
 -- Press `y` then enter
 -- Check the status, you want a green Active status
 -- `sudo service mysql status`
-1. ** Configure Security**
+1. **Configure Security**
 -- `sudo mysql_secure_installation`
 -- Press `Enter`
 -- Put in the password you want to use
@@ -57,7 +57,7 @@ Attempting to build an application to help solidfy what I have learned and test 
 
 ------------
 
-### Installing
+### Finish Installing & Starting
 1. npm should have been installed with Node JS
 -- Check the version `npm -v` Should be 6.11+
 1. Install dependencies `npm i`
@@ -65,3 +65,11 @@ Attempting to build an application to help solidfy what I have learned and test 
 -- This will create the tables on the MySQL database you built
 1. Start project `ionic serve` 
 1. Go to http://localhost:8100
+
+------------
+
+### Getting PWA to Work
+1. Run `ionic build --prod` in your project root
+1. go to the prod folder created, for me it's **www**
+1. run `http-server -p 8081`
+-- **http-server** library should have been installed when you installed the dependencies
