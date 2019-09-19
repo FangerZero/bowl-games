@@ -2,7 +2,6 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const salt = 13;
-const secretKey = '720Qu9|&r)/(uCOq!m:P)z*9bDS,2)_qYbLTY7EkAQQk_7ipRWZ2UZIZ1fu_fMya5azU2xd4VTD_aN8JeLum43LfxGUZ2Ye_73ed4M4nA71$h_7E3DH!M70r4d4Y_t34(H4m4NT0715h_73EDH1mF0R41!7ET1m3_0UYiML6xfHuuQ_gMAjwz56ubcBYg_vqt3sZfrVsPeqce_p39AtSBlDzXMPiMywdI_C~aKo-|N8jBfsIC..}g^Qo1f.=eR<V';
 const generator = require('generate-password');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
@@ -231,9 +230,9 @@ exports.postLogin =  (req, res, next) => {
             }
             let token;
             if (fetchedUser.admin) {
-                token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id, admin: true}, secretKey, { expiresIn: '1h' });
+                token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id, admin: true}, process.env.AUTH_KEY, { expiresIn: '1h' });
             } else {
-                token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id}, secretKey, { expiresIn: '1h' });
+                token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser.id}, process.env.AUTH_KEY, { expiresIn: '1h' });
             }
             
             res.status(200).json({ token, isAdmin: fetchedUser.admin });
