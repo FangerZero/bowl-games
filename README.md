@@ -11,11 +11,11 @@ Application built that will allow an admin to list bowls, teams, and games for u
 * PWA
 ---
 # Get Setup
- [ ] Download and install the latest version of VSCode (Just click next)	https://code.visualstudio.com/
- [ ] Download and install the 10.16.3 version of NodeJS (Just click next)	https://nodejs.org/en/
- [ ] Download and install the latest version of git (Just click next)	https://git-scm.com/download/win
- [ ] Download and install the latest version of MySQL Workbench (Just click next) https://dev.mysql.com/downloads/workbench/
- [ ] **Get Bash Terminal**
+- [ ] Download and install the latest version of VSCode (Just click next)	https://code.visualstudio.com/
+- [ ] Download and install the 10.16.3 version of NodeJS (Just click next)	https://nodejs.org/en/
+- [ ] Download and install the latest version of git (Just click next)	https://git-scm.com/download/win
+- [ ] Download and install the latest version of MySQL Workbench (Just click next) https://dev.mysql.com/downloads/workbench/
+- [ ] **Get Bash Terminal**
 1. Open terminal
 1. Open Command Palette: `Ctrl + Shift + P`
 1. Type `Select Default Shell`
@@ -23,11 +23,11 @@ Application built that will allow an admin to list bowls, teams, and games for u
 1. Open a New Terminal
 ---
 # Setup Project
- [ ] **Clone Project**
+- [ ] **Clone Project**
 1. `git clone https://github.com/FangerZero/bowl-games.git`
 	You may need to login. 
 
- [ ] **Install Dependencies**
+- [ ] **Install Dependencies**
 1. Run command `npm i`
 1. Install Angular `npm install -g @angular/cli`
 1. Insall Ionic `npm install -g ionic`
@@ -37,7 +37,7 @@ Application built that will allow an admin to list bowls, teams, and games for u
 # Setup MySQL Windows
 Tables created when backend server runs
 
- [ ] Install MySQL Server
+- [ ] Install MySQL Server
 1. Download and install the latest version of MySQL Server https://dev.mysql.com/downloads/windows/installer/8.0.html
 1. For help https://www.onlinetutorialspoint.com/mysql/install-mysql-on-windows-10-step-by-step.html
 1. Keep Defaults until you get to "Select Products & Features"
@@ -47,12 +47,12 @@ Tables created when backend server runs
 1. Remember your root account password
 1. Click Next/Execute until complete
 
- [ ] Start MySQL Server
+- [ ] Start MySQL Server
 1. Should auto start
 1. If not go to windows button and type services
 1. Look for the name of your database, right click and start
 
- [ ] **Setup Schema**
+- [ ] **Setup Schema**
 1. Open MySQL Workbench
 1. Create a new new connection, if running local use `127.0.0.1:3306`
 1. Use the password & user name you created earlier
@@ -68,12 +68,12 @@ Tables created when backend server runs
 # Setup MySQL Linux
 Tables created when backend server runs
 
- [ ] **Install & Update MySQL Server**
+- [ ] **Install & Update MySQL Server**
 1. Run command `apt update && sudo apt install mysql-server`
 1. Press `Y` then `Enter`
 1. Check the status `service mysql status`
 
- [ ] **Configure Server**
+- [ ] **Configure Server**
 1. `mysql_secure_installation`
 1. Press `Enter`
 1. Put in the password and keep it handy
@@ -84,7 +84,7 @@ Tables created when backend server runs
 1. Press `Y`
 1. Press `Enter`
 
- [ ] **Setup Schema**
+- [ ] **Setup Schema**
 1. You should be in `mysql>` command line
    Below replace <NAME> with the name of your database
 1. Run command `CREATE DATABASE <NAME>;`
@@ -93,7 +93,7 @@ Tables created when backend server runs
 1. Run command `CREATE USER'<USER>'@localhost' IDENTIFIED BY '<PASSWORD>';`
 1. Run command `GRANT ALL PRIVILEGES ON <NAME>.* TO '<USER>'@'localhost';`
 
- [ ] Start MySQL Server
+- [ ] Start MySQL Server
 1. Run command `` in terminal
 
 **You will create the table when you start the NodeJS server.**
@@ -101,19 +101,19 @@ Tables created when backend server runs
 ---
 #Progress Web Application Setup (PWA)
 You will need to set this up as there are certain pieces that necessary
- [ ] **Vapid Keys**
+- [ ] **Vapid Keys**
 1. Generate Keys `web-push generate-vapid-keys`
 ---
 # Start Servers
 
- [ ] **.env File**
+- [ ] **.env File**
 1. You need to fill out the .env.sample file
 
- [ ] **Node JS Server**
+- [ ] **Node JS Server**
 1. Run command `node server.js`
 	This will create your tables
 
- [ ] **Client Server w/out PWA**
+- [ ] **Client Server w/out PWA**
 1. Run command `ionic serve`
 1. If the command is not found continue below
 1. Open a folder
@@ -128,7 +128,7 @@ You will need to set this up as there are certain pieces that necessary
 1. Restart your machine
 1. Run VSCode as Admin
 
- [ ] **Client Server w/ PWA**
+- [ ] **Client Server w/ PWA**
 1. If the commands are not found, follow steps 2-13 from **Client Server w/out PWA**
 1. in the project root folder, `bowl-games`
 1. Run command `ionic build --prod`
