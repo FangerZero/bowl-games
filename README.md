@@ -1,75 +1,120 @@
-### WIP
-This ReadMe File is a work in progress, I have not tested these instructions yet. Please use them at your own disgression.
+# Bowl Games
+Application built that will allow an admin to list bowls, teams, and games for users to select who they think will win. 
 
-------------
+---
+# Technologies
+* MySQL 8
+* Express
+* Angular 8
+* Node JS 10.16.3
+* Ionic 4
+* PWA
+---
+# Get Setup
+[ ] Download and install the latest version of VSCode (Just click next)	https://code.visualstudio.com/
+[ ] Download and install the 10.16.3 version of NodeJS (Just click next)	https://nodejs.org/en/
+[ ] Download and install the latest version of git (Just click next)	https://git-scm.com/download/win
+[ ] Download and install the latest version of MySQL Workbench (Just click next) https://dev.mysql.com/downloads/workbench/
+[ ] **Get Bash Terminal**
+1. Open terminal
+1. Open Command Palette: `Ctrl + Shift + P`
+1. Type `Select Default Shell`
+1. Select `Git Bash`
+1. Open a New Terminal
+---
+# Setup Project
+[ ] **Clone Project**
+1. `git clone https://github.com/FangerZero/bowl-games.git`
+	You may need to login. 
 
-### bowl-games
-Attempting to build an application to help solidfy what I have learned and test new technologies I'm trying to learn.
-
-------------
-
-### Languages/Frameworks used
-* NodeJS Express Sequelize - Backend
-* MySQL - Database
-* Angular - Frontend
-* Ionic - Styling
-
-------------
-
-### Pre-reqruisites
-1. Install [Node JS](https://nodejs.org/en/download/ "Node JS")
-1. Install Ionic `npm install -g ionic`
+[ ] **Install Dependencies**
+1. Run command `npm i`
 1. Install Angular `npm install -g @angular/cli`
+1. Insall Ionic `npm install -g ionic`
 1. Install Express `npm install --save express`
-1. Install SQL Server
+1. Install web-push `npm install web-push -g`
+---
+# Setup MySQL Windows
+Tables created when backend server runs
 
-------------
+[ ] Install MySQL Server
+1. Download and install the latest version of MySQL Server https://dev.mysql.com/downloads/windows/installer/8.0.html
+1. For help https://www.onlinetutorialspoint.com/mysql/install-mysql-on-windows-10-step-by-step.html
+1. Keep Defaults until you get to "Select Products & Features"
+1. Select Products & Features
+	Install MySQL Servers > MySQL Server 8.0.17 -X64
+	Install Application > MySQL Shell 8.0.17 -X64
+1. Remember your root account password
+1. Click Next/Execute until complete
 
-### Installing & Setting up MySQL
-1. **Install and Update mysql-server**
--- Run the following command in VS Code
--- `sudo apt update && sudo apt install mysql-server`
--- Press `y` then enter
--- Check the status, you want a green Active status
--- `sudo service mysql status`
-1. **Configure Security**
--- `sudo mysql_secure_installation`
--- Press `Enter`
--- Put in the password you want to use
--- Remember this password
--- Press `Y` then enter
--- Press `Y` then enter
--- Press `Y` then enter
--- Press `Y` then enter
-1. **Setup Schema**
--- You should be in the `mysql>` on your command line
--- Create a database, replace `<NAME>` with the name you want to use for your database
--- `CREATE DATABASE <NAME>;`
--- `USE <NAME>;`
--- Create User account. Replace <USER> with the root user. Replace <PASSWORD> with the root user's password.
--- `CREATE USER'<USER>'@localhost' IDENTIFIED BY '<PASSWORD>';`
--- Granting privledges
--- `GRANT ALL PRIVILEGES ON <NAME>.* TO '<USER>'@'localhost';`
-1. **Download/Install MySql Workbench**
--- [MySQL Workbench](https://dev.mysql.com/downloads/workbench/ "MySQL Workbench")
--- Assuming you are running locally, you can connect using `127.0.0.1:3306`
--- You will not have any tables until you start the Node JS server
+[ ] Start MySQL Server
+1. Should auto start
+1. If not go to windows button and type services
+1. Look for the name of your database, right click and start
 
-------------
+[ ] **Setup Schema**
+1. Open MySQL Workbench
+1. Create a new new connection, if running local use `127.0.0.1:3306`
+1. Use the password & user name you created earlier
+1. Once connected on the left look for "Users and Privileges", it' sunder management
+1. Click Add Account
+1. Create a new account and give DBA privileges
+1. Create a new Schema and call it bowl_games
+1. In the code file server/util/database.js change the username and password to the account you just created
 
-### Finish Installing & Starting
-1. npm should have been installed with Node JS
--- Check the version `npm -v` Should be 6.11+
-1. Install dependencies `npm i`
-1. Start Backend `node server.js`
--- This will create the tables on the MySQL database you built
-1. Start project `ionic serve` 
-1. Go to http://localhost:8100
+**You will create the table when you start the NodeJS server.**
 
-------------
+--- 
+# Setup MySQL Linux
+Tables created when backend server runs
 
-### Getting PWA to Work
-1. Run `ionic build --prod` in your project root
-1. go to the prod folder created, for me it's **www**
-1. run `http-server -p 8081`
--- **http-server** library should have been installed when you installed the dependencies
+[ ] **Install & Update MySQL Server**
+1. Run command `apt update && sudo apt install mysql-server`
+1. Press `Y` then `Enter`
+1. Check the status `service mysql status`
+
+[ ] **Configure Server**
+1. `mysql_secure_installation`
+1. Press `Enter`
+1. Put in the password and keep it handy
+1. Press `Y`
+1. Press `Enter`
+1. Press `Y`
+1. Press `Enter`
+1. Press `Y`
+1. Press `Enter`
+
+[ ] **Setup Schema
+1. You should be in `mysql>` command line
+   Below replace <NAME> with the name of your database
+1. Run command `CREATE DATABASE <NAME>;`
+1. Run command `USE <NAME>;`
+1. Create User account. Replace with the root user. Replace with the root user's password.
+1. Run command `CREATE USER'<USER>'@localhost' IDENTIFIED BY '<PASSWORD>';`
+1. Run command `GRANT ALL PRIVILEGES ON <NAME>.* TO '<USER>'@'localhost';`
+
+[ ] Start MySQL Server
+1. Run command `` in terminal
+
+**You will create the table when you start the NodeJS server.**
+
+---
+#Progress Web Application Setup (PWA)
+You will need to set this up as there are certain pieces that necessary
+[ ] **Vapid Keys**
+1. Generate Keys `web-push generate-vapid-keys`
+---
+# Start Servers
+
+[ ] **.env File**
+1. You need to fill out the .env.sample file
+
+[ ] **Node JS Server**
+1. Run command `node server.js`
+	This will create your tables
+
+[ ] **Client Server w/out PWA**
+1. 
+
+[ ] **Client Server w PWA**
+1. 
