@@ -129,6 +129,7 @@ You will need to set this up as there are certain pieces that necessary
 1. Run VSCode as Admin
 
 - [ ] **Client Server w/ PWA**
+1. Install http-server `npm install http-server -g`
 1. If the commands are not found, follow steps 2-13 from **Client Server w/out PWA**
 1. in the project root folder, `bowl-games`
 1. Run command `ionic build --prod`
