@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="loadedGames.length">
+<ion-content class="ion-padding" *ngIf="loadedGames && loadedGames.length">
   <ion-list *ngFor="let game of loadedGames">
     <ion-radio-group (ionSelect)="onSelectTeam($event, game.id)">
       <ion-list-header>
@@ -31,6 +31,6 @@
   <ion-button *ngIf="!loadedProfile || !loadedProfile.paid" expand="block" (click)="onPay()">Submit</ion-button>
   <div *ngIf="!loadedProfile || !loadedProfile.paid" class="ion-center">By submitting a payment, you understand it's your responsibiilty to ensure your selections are completed before each game.</div>
 </ion-content>
-<ion-content class="ion-padding" *ngIf="!loadedGames.length">
+<ion-content class="ion-padding" *ngIf="!loadedGames || !loadedGames.length">
   No Games Setup
 </ion-content> 
