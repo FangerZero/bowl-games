@@ -45,13 +45,12 @@ export class AuthService {
       });
   }
 
-  recoverPassword() {
-    console.log('Need to recover Password');
-   /* this.http.get(`${environment.api_url}/users/recover`)
+  recoverPassword(email: string) {
+    const data = { email };
+    this.http.post(`${environment.api_url}/users/recover`, data)
     .subscribe(response => {
-      console.log('FML');
+      console.log('Check email');
     });
-    */
   }
 
   autoLogin() {

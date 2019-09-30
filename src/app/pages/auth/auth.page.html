@@ -44,7 +44,7 @@
             </ion-list>
             <div class="ion-text-center">
               <ion-button type="submit" color="primary" expand="block" [disabled]="!login.valid">{{ isLogin ? 'Login' : 'Sign-up'}}</ion-button>
-              <ion-button *ngIf="isLogin" type="button" color="primary" fill="clear" expand="block" (click)="onGetPassword()">Recover Password</ion-button>
+              <ion-button *ngIf="isLogin" type="button" color="primary" fill="clear" expand="block" (click)="onGetPassword(login)">Recover Password</ion-button>
               <ion-button type="button" color="primary" fill="clear" expand="block" (click)="onSwitchAuthMode()">{{ isLogin ? 'Sign-up' : 'Login'}}</ion-button>
             </div>
           </ion-col>

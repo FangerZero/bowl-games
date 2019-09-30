@@ -143,25 +143,25 @@ exports.getPassword = (req, res, next) => {
         length: 10,
         numbers: true
     });
+    console.log('new password: ', password);
 
     bcrypt.hash(password, salt)
     .then(hash => {
         User.findOne({
-            attributes: ['email', 'password'],
             where: {
-                email: 'Test@123'
+                email: req.body.email
               }
           })
         .then(user => {
-            if(user.length) {
+            if(user) {
                 user.password = hash;
 
                 const output = `
                 <h3>New Password Request</h3>
                 <p>
-                Here is your new password you requested ${password}
+                Here is your new password you requested <b>${password}</b>
                 </p>`;
-            
+                /*
                 let transporter = nodemailer.createTransport({
                     host: process.env.MAIL_HOST,
                     port: process.env.MAIL_PORT,
@@ -175,7 +175,7 @@ exports.getPassword = (req, res, next) => {
                 // user.dataValues.email
                 let mailOptions = {
                     from: `"Bowl Games Support" ${process.env.EMAIL}`,
-                    to: 'fangerzero@gmail.com',
+                    to: user.email,
                     subject: `Bowl Games Password Recovery`,
                     text: 'This email is from the support form',
                     html: output
@@ -186,8 +186,8 @@ exports.getPassword = (req, res, next) => {
                     console.log('trans', response);
                     res.send('Email has been sent');
                 }).catch(err => console.log('error', err));
-
-                return user.save();
+                */
+                //return user.save();
             }
         }).catch(err => console.log(err));
     })

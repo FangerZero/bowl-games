@@ -29,9 +29,7 @@ export class AuthPage implements OnInit, OnDestroy {
   }
 
   onGetPassword(form: NgForm) {
-    console.log(form);
-    this.authService.recoverPassword();
-    console.log('Need to generate new password');
+    this.authService.recoverPassword(form.value.email);
   }
 
   onSwitchAuthMode() {
